@@ -3,7 +3,6 @@ import './App.css';
 import {MuiThemeProvider, createMuiTheme} from "@material-ui/core";
 import Navbar from '../components/navbar/Navbar';
 import Welcome from './welcome/Welcome';
-
 const theme = createMuiTheme({
     palette: {
         primary: {
@@ -18,6 +17,7 @@ const theme = createMuiTheme({
 
     },
 });
+
 
 
 function App() {

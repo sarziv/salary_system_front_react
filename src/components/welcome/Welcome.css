@@ -69,10 +69,6 @@ section .wave:before {
     bottom: 55vh;
     position: relative;
 }
-.letterColor {
-
-}
-
 .joinButton {
     display: flex;
     flex-wrap: wrap;
