@@ -5,9 +5,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import MenuIconClose from '@material-ui/icons/Close';
-
 import Logo from '../../image/bls-s-s_logo.png';
 import './Navbar.css';
 
@@ -32,15 +29,19 @@ const styles = {
 function ButtonAppBar(props) {
     const { classes } = props;
     const [open,setOpen] = useState(false);
+    const [navbar,setNavbar] = useState('fas fa-bars');
 
     useEffect(
     ()=> {
         const navOpen='sidenavOpen';
+
         const element = document.getElementById('sidebar').classList;
         if(open === true){
             element.add(navOpen);
+            setNavbar('fas fa-times');
         }else {
             element.remove(navOpen);
+            setNavbar('fas fa-bars');
         }
     }
 )
@@ -54,7 +55,7 @@ function ButtonAppBar(props) {
                     <Typography variant="h6" className={classes.grow}>
                     </Typography>
                     <IconButton onClick={()=> setOpen(!open)} className={classes.menuButton}  aria-label="Menu">
-                        <MenuIcon/>
+                        <i className={navbar}></i>
                     </IconButton>
                 </Toolbar>
             </AppBar>
