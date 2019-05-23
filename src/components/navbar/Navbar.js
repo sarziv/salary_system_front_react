@@ -6,6 +6,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import MenuIconClose from '@material-ui/icons/Close';
+
 import Logo from '../../image/bls-s-s_logo.png';
 import './Navbar.css';
 
@@ -29,10 +31,19 @@ const styles = {
 
 function ButtonAppBar(props) {
     const { classes } = props;
-
     const [open,setOpen] = useState(false);
 
-
+    useEffect(
+    ()=> {
+        const navOpen='sidenavOpen';
+        const element = document.getElementById('sidebar').classList;
+        if(open === true){
+            element.add(navOpen);
+        }else {
+            element.remove(navOpen);
+        }
+    }
+)
 
     return (
         <div className={classes.root}>
@@ -42,12 +53,12 @@ function ButtonAppBar(props) {
                     <img className={classes.img} src={Logo} alt={Logo}/>
                     <Typography variant="h6" className={classes.grow}>
                     </Typography>
-                    <IconButton onClick={()=> setOpen(open+1)} className={classes.menuButton}  aria-label="Menu">
+                    <IconButton onClick={()=> setOpen(!open)} className={classes.menuButton}  aria-label="Menu">
                         <MenuIcon/>
                     </IconButton>
                 </Toolbar>
             </AppBar>
-            <div className="sidenav">
+            <div id="sidebar" className="sidenav sidenavOpen">
                 <a href="/">About</a>
                 <a href="/">Services</a>
                 <a href="/">Clients</a>
