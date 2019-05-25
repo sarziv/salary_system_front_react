@@ -1,6 +1,6 @@
-import React, { useState,useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -20,31 +20,29 @@ const styles = {
         marginLeft: -12,
         marginRight: 20,
     },
-    img:{
-        width:150,
-        height:50
+    img: {
+        width: 150,
+        height: 50
     },
 };
 
 function ButtonAppBar(props) {
-    const { classes } = props;
-    const [open,setOpen] = useState(false);
-    const [navbar,setNavbar] = useState('fas fa-bars');
+    const {classes} = props;
+    const [navbar, setNavbar] = useState(false);
+    const [icon, setIcon] = useState('bars');
+    const [open, setOpen] = useState('sidenavClosed');
 
     useEffect(
-    ()=> {
-        const navOpen='sidenavOpen';
-
-        const element = document.getElementById('sidebar').classList;
-        if(open === true){
-            element.add(navOpen);
-            setNavbar('fas fa-times');
-        }else {
-            element.remove(navOpen);
-            setNavbar('fas fa-bars');
-        }
-    }
-)
+        () => {
+            if (navbar === true) {
+                setOpen('sidenavOpen');
+                setIcon('times');
+            } else {
+                setOpen('sidenavClosed');
+                setIcon('bars');
+            }
+        },[navbar],
+    )
 
     return (
         <div className={classes.root}>
@@ -54,12 +52,12 @@ function ButtonAppBar(props) {
                     <img className={classes.img} src={Logo} alt={Logo}/>
                     <Typography variant="h6" className={classes.grow}>
                     </Typography>
-                    <IconButton onClick={()=> setOpen(!open)} className={classes.menuButton}  aria-label="Menu">
-                        <i className={navbar}></i>
+                    <IconButton onClick={() => setNavbar(!navbar)} className={classes.menuButton} aria-label="Menu">
+                        <i className={"fas fa-" + icon}></i>
                     </IconButton>
                 </Toolbar>
             </AppBar>
-            <div id="sidebar" className="sidenav sidenavOpen">
+            <div className={"sidenav " + open}>
                 <a href="/">About</a>
                 <a href="/">Services</a>
                 <a href="/">Clients</a>
