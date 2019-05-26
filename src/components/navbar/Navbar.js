@@ -29,20 +29,21 @@ const styles = {
 function ButtonAppBar(props) {
     const {classes} = props;
     const [navbar, setNavbar] = useState(false);
-    const [icon, setIcon] = useState('bars');
-    const [open, setOpen] = useState('sidenavClosed');
+    const [open, setOpen] = useState({icon:'bars',sidebar:'sidenavClosed'});
 
-    useEffect(
-        () => {
-            if (navbar === true) {
-                setOpen('sidenavOpen');
-                setIcon('times');
-            } else {
-                setOpen('sidenavClosed');
-                setIcon('bars');
-            }
-        },[navbar],
-    )
+    const toogleNavbar = (props) => {
+        if(navbar === true){
+            setOpen({
+               ...open,icon: 'times',sidebar: 'sidenavOpen'
+            })
+
+        }else{
+            setOpen({
+                ...open,icon: 'bars',sidebar: 'sidenavClosed'
+            })
+        }
+        setNavbar(!navbar);
+    }
 
     return (
         <div className={classes.root}>
@@ -52,12 +53,12 @@ function ButtonAppBar(props) {
                     <img className={classes.img} src={Logo} alt={Logo}/>
                     <Typography variant="h6" className={classes.grow}>
                     </Typography>
-                    <IconButton onClick={() => setNavbar(!navbar)} className={classes.menuButton} aria-label="Menu">
-                        <i className={"fas fa-" + icon}></i>
+                    <IconButton onClick={toogleNavbar} className={classes.menuButton} aria-label="Menu">
+                        <i className={"fas fa-" + open.icon}></i>
                     </IconButton>
                 </Toolbar>
             </AppBar>
-            <div className={"sidenav " + open}>
+            <div className={"sidenav " + open.sidebar}>
                 <a href="/">About</a>
                 <a href="/">Services</a>
                 <a href="/">Clients</a>
