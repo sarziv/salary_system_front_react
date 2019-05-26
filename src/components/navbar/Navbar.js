@@ -28,22 +28,22 @@ const styles = {
 
 function ButtonAppBar(props) {
     const {classes} = props;
-    const [navbar, setNavbar] = useState(false);
-    const [open, setOpen] = useState({icon:'bars',sidebar:'sidenavClosed'});
+    const [open,setOpen] = useState(false);
+    const [navbar, setNavbar] = useState({toggler:false,icon:'bars',sidebar:'sidenavClosed'});
 
-    const toogleNavbar = (props) => {
-        if(navbar === true){
-            setOpen({
-               ...open,icon: 'times',sidebar: 'sidenavOpen'
-            })
-
-        }else{
-            setOpen({
-                ...open,icon: 'bars',sidebar: 'sidenavClosed'
-            })
-        }
-        setNavbar(!navbar);
-    }
+    useEffect(
+        () => {
+            if (open === true) {
+                    setNavbar({
+                        ...navbar,icon: 'times',sidebar: 'sidenavOpen'
+                    })
+            } else {
+                setNavbar({
+                    ...navbar,icon: 'bars',sidebar: 'sidenavClosed'
+                })
+            }
+        },[open],
+    )
 
     return (
         <div className={classes.root}>
@@ -53,12 +53,12 @@ function ButtonAppBar(props) {
                     <img className={classes.img} src={Logo} alt={Logo}/>
                     <Typography variant="h6" className={classes.grow}>
                     </Typography>
-                    <IconButton onClick={toogleNavbar} className={classes.menuButton} aria-label="Menu">
-                        <i className={"fas fa-" + open.icon}></i>
+                    <IconButton onClick={() => setOpen(!open)} className={classes.menuButton} aria-label="Menu">
+                        <i className={"fas fa-" + navbar.icon}></i>
                     </IconButton>
                 </Toolbar>
             </AppBar>
-            <div className={"sidenav " + open.sidebar}>
+            <div className={"sidenav " + navbar.sidebar}>
                 <a href="/">About</a>
                 <a href="/">Services</a>
                 <a href="/">Clients</a>
