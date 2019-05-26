@@ -28,21 +28,21 @@ const styles = {
 
 function ButtonAppBar(props) {
     const {classes} = props;
-    const [open,setOpen] = useState(false);
-    const [navbar, setNavbar] = useState({toggler:false,icon:'bars',sidebar:'sidenavClosed'});
+    const [open, setOpen] = useState(false);
+    const [navbar, setNavbar] = useState({icon: 'bars', sidebar: 'sidenavClosed'});
 
     useEffect(
         () => {
             if (open === true) {
-                    setNavbar({
-                        ...navbar,icon: 'times',sidebar: 'sidenavOpen'
-                    })
+                setNavbar({
+                    icon: 'times', sidebar: 'sidenavOpen'
+                })
             } else {
                 setNavbar({
-                    ...navbar,icon: 'bars',sidebar: 'sidenavClosed'
+                    icon: 'bars', sidebar: 'sidenavClosed'
                 })
             }
-        },[open],
+        }, [open],
     )
 
     return (
