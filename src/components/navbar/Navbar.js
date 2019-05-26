@@ -1,12 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import PropTypes from 'prop-types';
-import {withStyles} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import Logo from '../../image/bls-s-s_logo.png';
 import './Navbar.css';
+import { Link } from "react-router-dom";
 
 //Top navbar
 const styles = {
@@ -26,8 +25,8 @@ const styles = {
     },
 };
 
-function ButtonAppBar(props) {
-    const {classes} = props;
+function NavBar() {
+
     const [open, setOpen] = useState(false);
     const [navbar, setNavbar] = useState({icon: 'bars', sidebar: 'sidenavClosed'});
 
@@ -46,30 +45,25 @@ function ButtonAppBar(props) {
     )
 
     return (
-        <div className={classes.root}>
-
+        <div style={styles.root}>
             <AppBar position="fixed" color="primary">
                 <Toolbar>
-                    <img className={classes.img} src={Logo} alt={Logo}/>
-                    <Typography variant="h6" className={classes.grow}>
+                    <img style={styles.img} src={Logo} alt={Logo}/>
+                    <Typography variant="h6" style={styles.grow}>
                     </Typography>
-                    <IconButton onClick={() => setOpen(!open)} className={classes.menuButton} aria-label="Menu">
+                    <IconButton onClick={() => setOpen(!open)} style={styles.menuButton} aria-label="Menu">
                         <i className={"fas fa-" + navbar.icon}></i>
                     </IconButton>
                 </Toolbar>
             </AppBar>
             <div className={"sidenav " + navbar.sidebar}>
-                <a href="/">About</a>
-                <a href="/">Services</a>
-                <a href="/">Clients</a>
-                <a href="/">Contact</a>
+                 <Link to="/" onClick={() =>setOpen(!open)}>Home</Link>
+                 <Link to="/login" onClick={() =>setOpen(!open)}>Login</Link>
             </div>
         </div>
+
     );
 }
 
-ButtonAppBar.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
 
-export default withStyles(styles)(ButtonAppBar);
+export default NavBar;

@@ -2,11 +2,12 @@ import React from 'react';
 import './App.css';
 import {MuiThemeProvider, createMuiTheme} from "@material-ui/core";
 import Navbar from '../components/navbar/Navbar';
-import Welcome from './welcome/Welcome';
+import Main from './router/Router';
+
 const theme = createMuiTheme({
     palette: {
         primary: {
-            main:  '#E3E3E3',
+            main: '#E3E3E3',
         },
         secondary: {
             main: '#000000',
@@ -18,15 +19,15 @@ const theme = createMuiTheme({
     },
 });
 
-
-
 function App() {
-  return (
-      <MuiThemeProvider theme={theme}>
-          <Navbar/>
-          <Welcome/>
-      </MuiThemeProvider>
-  );
+    return (
+        <div>
+            <MuiThemeProvider theme={theme}>
+                <Navbar/>
+                <Main/>
+            </MuiThemeProvider>
+        </div>
+    );
 }
 
 export default App;
