@@ -1,19 +1,19 @@
-import React, { useState} from 'react';
+import React, {useState} from 'react';
 import './Recover.css';
 
 function Recover() {
 
     const [form, setForm] = useState({email: ''});
 
-const handleSubmit= (e) => {
-    e.preventDefault();
-    if(form.email !== ''){
-        alert(`Recover email: ${form.email}`)
-    }else{
-        alert(`No email provided!`)
-    }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (form.email !== '') {
+            alert(`Recover email: ${form.email}`)
+        } else {
+            alert(`No email provided!`)
+        }
 
-}
+    }
 
     return (
         <div className="recover">
@@ -28,7 +28,8 @@ const handleSubmit= (e) => {
 
 
                     <div className="d-flex justify-content-center py-3">
-                        <button className="btn btn-outline-light p-3" type="submit" value="submit">Gauti slaptažodį</button>
+                        <button className="btn btn-outline-light p-3" type="submit" value="submit">Gauti slaptažodį
+                        </button>
                     </div>
                 </div>
             </form>

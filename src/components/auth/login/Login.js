@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 
 function Login() {
 
-    const [form, setForm] = useState({email: '', password: ''})
+    const [form, setForm] = useState({email: '', password: ''});
 
     const handleSubmit = (e) => {
         e.preventDefault();

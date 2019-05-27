@@ -28,17 +28,17 @@ const styles = {
 function NavBar() {
 
     const [open, setOpen] = useState(false);
-    const [navbar, setNavbar] = useState({icon: 'bars', sidebar: 'sidenavClosed'});
+    const [navbar, setNavbar] = useState({iconParams :{icon: 'bars',iconColor:'faBars'}, sidebar: 'sidenavClosed'});
 
     useEffect(
         () => {
             if (open === true) {
                 setNavbar({
-                    icon: 'times', sidebar: 'sidenavOpen'
+                    iconParams:{icon: 'times',Color:'faTimes'}, sidebar: 'sidenavOpen'
                 })
             } else {
                 setNavbar({
-                    icon: 'bars', sidebar: 'sidenavClosed'
+                    iconParams:{icon: 'bars',Color:'faBars'}, sidebar: 'sidenavClosed'
                 })
             }
         }, [open],
@@ -52,7 +52,7 @@ function NavBar() {
                     <Typography variant="h6" style={styles.grow}>
                     </Typography>
                     <IconButton onClick={() => setOpen(!open)} style={styles.menuButton} aria-label="Menu">
-                        <i className={"fas fa-" + navbar.icon}></i>
+                        <i className={"fas fa-" + navbar.iconParams.icon +' '+ navbar.iconParams.Color}></i>
                     </IconButton>
                 </Toolbar>
             </AppBar>

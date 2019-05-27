@@ -3,7 +3,7 @@ import './Register.css';
 
 function Register() {
 
-    const [form, setForm] = useState({name:'',email: '', password: '',passwordConfirm: ''});
+    const [form, setForm] = useState({name: '', email: '', password: '', passwordConfirm: ''});
 
     const handleSubmit = (e) => {
         e.preventDefault();
