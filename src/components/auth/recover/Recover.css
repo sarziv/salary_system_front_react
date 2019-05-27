@@ -1,15 +1,8 @@
-.login {
+.recover {
     padding-top: 20vh;
     font-family: 'Poppins', sans-serif;
     color: #F55E27;
     background: #1951fe;
     width: 100%;
     height: 100vh;
-}
-.recoverLink {
-    text-decoration: none;
-    color: #F55E27 !important;
-}
-.recoverLink:hover{
-    color: white !important;
 }

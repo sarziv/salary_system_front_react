@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import './Login.css';
+import {Link} from "react-router-dom";
 
 function Login() {
 
@@ -30,8 +31,12 @@ function Login() {
                         <button className="btn btn-outline-light p-3" type="submit" value="submit">Prisijungti</button>
                     </div>
                 </div>
-
             </form>
+            <div className="d-flex justify-content-center">
+                <Link to="/recover">
+                    <div className="recoverLink"> Pamiršai prisijungimą?</div>
+                </Link>
+            </div>
         </div>
 
     )
