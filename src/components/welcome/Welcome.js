@@ -1,6 +1,6 @@
 import React from 'react';
 import './Welcome.css';
-
+import {Link} from 'react-router-dom';
 function Welcome() {
     return (
         <div>
@@ -17,7 +17,9 @@ function Welcome() {
                     </div>
                     <div className="bls"><h5>Prisijunk prie komandos!</h5></div>
                     <div className="joinButton">
-                        <button className="btn btn-outline-light">Prisijungti</button>
+                        <Link to="/login">
+                        <button className="btn btn-outline-light p-3">Prisijungti</button>
+                        </Link>
                     </div>
                 </div>
             </section>

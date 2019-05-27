@@ -57,8 +57,9 @@ function NavBar() {
                 </Toolbar>
             </AppBar>
             <div className={"sidenav " + navbar.sidebar}>
-                 <Link to="/" onClick={() =>setOpen(!open)}>Home</Link>
-                 <Link to="/login" onClick={() =>setOpen(!open)}>Login</Link>
+                 <Link to="/" onClick={() =>setOpen(!open)}>Pagrindinis</Link>
+                 <Link to="/login" onClick={() =>setOpen(!open)}>Prisijungti</Link>
+                 <Link to="/register" onClick={() =>setOpen(!open)}>Registruotis</Link>
             </div>
         </div>
 
