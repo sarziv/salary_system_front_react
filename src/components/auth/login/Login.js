@@ -10,7 +10,7 @@ function Login() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if(form.email.length || form.password.length === 0){
+        if((form.email.length && form.password.length) === 0){
             setError({errorMessage: true})
         }
 
@@ -25,7 +25,7 @@ function Login() {
                 setError({errorPassword: true})
             } else if (form.email.length !== 0) {
                 setError({errorPassword: false})
-            } else if (form.password.length === 0) {
+            } else if (form.password.length !== 0) {
                 setError({errorPassword: false})
             }
 

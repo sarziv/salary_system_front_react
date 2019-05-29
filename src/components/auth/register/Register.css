@@ -1,8 +1,11 @@
 .Register {
-    padding-top: 20vh;
+    padding-top: 15vh;
     font-family: 'Poppins', sans-serif;
     color: #F55E27;
     background: #1951fe;
     width: 100%;
     height: 100vh;
+}
+.bgRed {
+    background-color: red;
 }
