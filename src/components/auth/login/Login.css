@@ -13,3 +13,10 @@
 .recoverLink:hover{
     color: white !important;
 }
+.borderWarning {
+    box-shadow: 0 0 25px red;
+}
+.bgRed {
+    color: #000;
+    background-color: red;
+}
