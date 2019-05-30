@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e2fd16fd-d518-4517-89b5-ba5639bf9589" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/sarunas.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/sarunas.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/user/records/Records.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/user/records/Records.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -76,8 +75,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/user/records/Records.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="13" column="45" lean-forward="true" selection-start-line="13" selection-start-column="45" selection-end-line="13" selection-end-column="45" />
+            <state relative-caret-position="438">
+              <caret line="57" column="17" lean-forward="true" selection-start-line="57" selection-start-column="17" selection-end-line="57" selection-end-column="17" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -331,12 +330,12 @@
       <workItem from="1558889757113" duration="6247000" />
       <workItem from="1558905188827" duration="21162000" />
       <workItem from="1559058552613" duration="14397000" />
-      <workItem from="1559142389227" duration="7568000" />
+      <workItem from="1559142389227" duration="7978000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="86796000" />
+    <option name="totallyTimeSpent" value="87206000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -621,8 +620,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/user/records/Records.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="13" column="45" lean-forward="true" selection-start-line="13" selection-start-column="45" selection-end-line="13" selection-end-column="45" />
+        <state relative-caret-position="438">
+          <caret line="57" column="17" lean-forward="true" selection-start-line="57" selection-start-column="17" selection-end-line="57" selection-end-column="17" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>

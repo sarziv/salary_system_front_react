@@ -16,7 +16,8 @@ function Records() {
     ];
 
     function DataDisplay(props) {
-        const listDisplay = props.userData.map((record) =>
+        const listDisplay = userData.map((record) =>
+
             <ExpansionPanel>
                 <ExpansionPanelSummary
                     expandIcon={<ExpandMoreIcon />}
@@ -42,7 +43,7 @@ function Records() {
                     </Typography>
                 </ExpansionPanelDetails>
             </ExpansionPanel>
-        );
+            );
 
         return (
             {listDisplay}
@@ -55,7 +56,7 @@ function Records() {
                 <div className="pl-3">Laikas</div>
                 <div className="pl-4">Uždirbta</div>
             </h6>
-           <DataDisplay userData={userData}/>
+           <DataDisplay props={userData}/>
         </div>
     );
 }
