@@ -2,9 +2,11 @@
   <dictionary name="sarunas">
     <words>
       <w>blogai</w>
+      <w>eilutės</w>
       <w>gauti</w>
       <w>lastname</w>
       <w>navbar</w>
+      <w>paletės</w>
       <w>pamiršai</w>
       <w>patvirtinimas</w>
       <w>paštas</w>
@@ -14,7 +16,9 @@
       <w>registruotis</w>
       <w>slaptažodis</w>
       <w>slaptažodį</w>
+      <w>toppading</w>
       <w>užpildyta</w>
+      <w>valandos</w>
       <w>vardas</w>
     </words>
   </dictionary>

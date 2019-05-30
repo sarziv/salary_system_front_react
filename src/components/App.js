@@ -11,7 +11,10 @@ const theme = createMuiTheme({
         },
         secondary: {
             main: '#000000',
-        }
+        },
+        text:{
+            main:'#F55E27',
+        },
     },
     typography: {
         useNextVariants: true,
