@@ -11,20 +11,12 @@ function Records() {
 
     const userData = [
         {id:1,date:5-28,pallet:250,lines:250,VIP:1,hour:1},
-        {id:1,date:5-27,pallet:251,lines:251,VIP:1,hour:1},
-        {id:1,date:5-21,pallet:252,lines:252,VIP:1,hour:1},
+        {id:2,date:5-27,pallet:251,lines:251,VIP:1,hour:1},
+        {id:3,date:5-21,pallet:252,lines:252,VIP:1,hour:1}
+    ];
 
-    ]
-
-    return (
-
-        <div className="container-fluid toppading">
-            <h4 className="d-flex justify-content-center">Istorija</h4>
-            <h6 className="d-flex">
-                <div className="pl-3">Laikas</div>
-                <div className="pl-4">Uždirbta</div>
-            </h6>
-
+    function DataDisplay(props) {
+        const listDisplay = props.userData.map((record) =>
             <ExpansionPanel>
                 <ExpansionPanelSummary
                     expandIcon={<ExpandMoreIcon />}
@@ -33,22 +25,37 @@ function Records() {
                 >
                     <Typography>
                         <div className="d-flex justify-content-between">
-                            <div className="float-left">5-28</div>
-                            <div className="pl-5">47.24$</div>
+                            <div className="float-left">{record.date}</div>
+                            <div className="pl-5">$</div>
+
                         </div>
                     </Typography>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                     <Typography>
-                       <ul>
-                           <li>Paletės:250</li>
-                           <li>Eilutės:250</li>
-                           <li>VIP:1</li>
-                           <li>Valandos:1</li>
-                       </ul>
+                        <ul>
+                            <li>Paletės:{record.pallet}</li>
+                            <li>Eilutės:{record.lines}</li>
+                            <li>VIP:{record.VIP}</li>
+                            <li>Valandos:{record.hour}</li>
+                        </ul>
                     </Typography>
                 </ExpansionPanelDetails>
             </ExpansionPanel>
+        );
+
+        return (
+            {listDisplay}
+        )}
+
+    return (
+        <div className="container-fluid toppading">
+            <h4 className="d-flex justify-content-center">Istorija</h4>
+            <h6 className="d-flex">
+                <div className="pl-3">Laikas</div>
+                <div className="pl-4">Uždirbta</div>
+            </h6>
+           <DataDisplay userData={userData}/>
         </div>
     );
 }
