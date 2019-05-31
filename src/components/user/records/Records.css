@@ -1,3 +1,6 @@
+html {
+    background-color: #1951fe;
+}
 .toppading {
     height: 100vh;
     background-color: #1951fe;
@@ -5,6 +8,6 @@
     font-family: 'Poppins', sans-serif;
     padding-top: 15vh;
 }
-.bgColor {
-    background-color: #1951fe;
+.bottompadding {
+    padding-bottom: 15vh;
 }

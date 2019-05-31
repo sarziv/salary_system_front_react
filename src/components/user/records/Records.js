@@ -14,7 +14,8 @@ function Records() {
     const userData = [
         {id:1,date:'5-25',pallet:250,lines:250,VIP:1,hour:1},
         {id:2,date:'5-24',pallet:251,lines:251,VIP:1,hour:1},
-        {id:3,date:'5-23',pallet:252,lines:252,VIP:1,hour:1}
+        {id:3,date:'5-23',pallet:252,lines:252,VIP:1,hour:1},
+
     ];
 
     function DataDisplay(props) {
@@ -62,6 +63,7 @@ function Records() {
                 <div className="pl-4">Uždirbta</div>
             </h6>
            <DataDisplay userData={userData}/>
+           <div className="bottompadding"></div>
         </div>
     );
 }
