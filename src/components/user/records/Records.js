@@ -38,13 +38,21 @@ function Records() {
                         </div>
                     </Typography>
                 </ExpansionPanelSummary>
-                <ExpansionPanelDetails>
+                <ExpansionPanelDetails className="d-flex justify-content-center">
                     <Typography>
-                        <ul>
-                            <li>Paletės:{record.pallet}</li>
-                            <li>Eilutės:{record.lines}</li>
-                            <li>VIP:{record.VIP}</li>
-                            <li>Valandos:{record.hour}</li>
+                        <ul className="list-group list-group-flush">
+                            <li className="list-group-item">Paletės:
+                                <span className="badge badge-primary badge-pill">{record.pallet}</span>
+                            </li>
+                            <li className="list-group-item">Eilutės:
+                                <span className="badge badge-primary badge-pill">{record.lines}</span>
+                            </li>
+                            <li className="list-group-item">VIP:
+                                <span className="badge badge-primary badge-pill">{record.VIP}</span>
+                            </li>
+                            <li className="list-group-item">Valandos:
+                                <span className="badge badge-primary badge-pill">{record.hour}</span>
+                            </li>
                         </ul>
                     </Typography>
                 </ExpansionPanelDetails>

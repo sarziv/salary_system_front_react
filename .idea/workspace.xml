@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e2fd16fd-d518-4517-89b5-ba5639bf9589" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/components/user/records/Records.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/user/records/Records.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/user/records/Records.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/user/records/Records.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -76,8 +75,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/user/records/Records.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="18" column="6" lean-forward="true" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="6" />
+            <state relative-caret-position="243">
+              <caret line="40" column="79" selection-start-line="40" selection-start-column="79" selection-end-line="40" selection-end-column="79" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -334,12 +333,12 @@
       <workItem from="1558905188827" duration="21162000" />
       <workItem from="1559058552613" duration="14397000" />
       <workItem from="1559142389227" duration="7978000" />
-      <workItem from="1559258405701" duration="2774000" />
+      <workItem from="1559258405701" duration="3253000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="89980000" />
+    <option name="totallyTimeSpent" value="90459000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -624,8 +623,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/user/records/Records.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="18" column="6" lean-forward="true" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="6" />
+        <state relative-caret-position="243">
+          <caret line="40" column="79" selection-start-line="40" selection-start-column="79" selection-end-line="40" selection-end-column="79" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
