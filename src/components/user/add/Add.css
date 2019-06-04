@@ -1,0 +1,16 @@
+html {
+    background-color: #1951fe;
+}
+.toppading {
+    height: 100vh;
+    background-color: #1951fe;
+    color: #F55E27;
+    font-family: 'Poppins', sans-serif;
+    padding-top: 15vh;
+}
+.bottompadding {
+    padding-bottom: 15vh;
+}
+.inputNumber {
+    width: 70px !important;
+}

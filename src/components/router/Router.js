@@ -5,7 +5,7 @@ import Login from '../auth/login/Login';
 import Register from '../auth/register/Register';
 import Recover from '../auth/recover/Recover';
 import Records from '../user/records/Records';
-import Add from '../user/records/Add';
+import Add from '../user/add/Add';
 
 function Routing() {
     return (
