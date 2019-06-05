@@ -12,6 +12,8 @@ function Login() {
 
         if ((form.email.length && form.password.length) === 0) {
             setError({errorMessage: true})
+        }else {
+            setError({errorMessage:false})
         }
 
         alert(`Data: ${form.email} ${form.password} ${error.errorMessage}`)
