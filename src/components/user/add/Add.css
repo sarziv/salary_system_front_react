@@ -14,3 +14,14 @@ html {
 .inputNumber {
     width: 70px !important;
 }
+.SalaryCount{
+    color: white;
+}
+.error {
+    color: black;
+     display: block;
+     background-color: red;
+ }
+.errorHide {
+    visibility: hidden;
+}

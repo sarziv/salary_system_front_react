@@ -18,7 +18,6 @@ function Login() {
     };
 
     useEffect(() => {
-
             if (form.email.length === 0) {
                 setError({errorEmail: true})
             } else if (form.password.length === 0) {
