@@ -1,20 +1,23 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import './Add.css';
 
 function Add() {
     const [add, setAdd] = useState({pallet: '', lines: '', vip: 0, hours: 0});
-    const [error,setError] = useState(false);
+    const [error, setError] = useState(false);
 
-    function primeApi() {
-        //TODO price api pallet,lines,hours,vip
-    }
-
+    /*
+        function primeApi() {
+            //TODO price api pallet,lines,hours,vip
+        }
+    */
     function handlerSubmit(e) {
         e.preventDefault();
 
-        if(add.pallet.length && add.lines.length === 0){
+        if (add.pallet.length === 0) {
             setError(true);
-        }else{
+        } else if (add.lines.length === 0) {
+            setError(true);
+        } else {
             setError(false);
         }
 
@@ -29,13 +32,13 @@ function Add() {
                 <form onSubmit={handlerSubmit}>
                     <div className="form-group">
                         <label htmlFor="palletAdd">Paletės</label>
-                        <input type="number" className="form-control" id="palletAdd" value={add.pallet}
-                               onChange={e => setAdd({...add,pallet: e.target.value})}/>
+                        <input min={0} type="number" className="form-control" id="palletAdd" value={add.pallet}
+                               onChange={e => setAdd({...add, pallet: e.target.value})}/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="linesAdd">Eilutės</label>
-                        <input type="number" className="form-control" id="linesAdd" value={add.lines}
-                               onChange={e => setAdd({...add,lines: e.target.value})}/>
+                        <input min={0} type="number" className="form-control" id="linesAdd" value={add.lines}
+                               onChange={e => setAdd({...add, lines: e.target.value})}/>
                     </div>
                     <div className="form-inline d-flex justify-content-around">
                         <div className="mb-2">
@@ -67,10 +70,11 @@ function Add() {
                     <div className="form-inline d-flex justify-content-center pt-3">
                         <label htmlFor="exampleInputSalary">Uždirbta:</label>
                         <div id="exampleInputSalary" className="SalaryCount mb-2 pl-2">
-                            {((add.pallet*0.11)+(add.lines*0.09)+(add.vip*3)+(add.hours*7)).toFixed(2)}€
+                            {((add.pallet * 0.11) + (add.lines * 0.09) + (add.vip * 3) + (add.hours * 7)).toFixed(2)}€
                         </div>
                     </div>
-                    <div className={error === true ? "container-fluid d-flex justify-content-center error" : 'errorHide'}>
+                    <div
+                        className={error === true ? "container-fluid d-flex justify-content-center error" : 'errorHide'}>
                         Neužpildyta
                     </div>
                     <div className="d-flex justify-content-center py-3">

@@ -38,11 +38,12 @@ function Records() {
                         </div>
                     </Typography>
                 </ExpansionPanelSummary>
-                <ExpansionPanelDetails className="d-flex justify-content-center">
+                <ExpansionPanelDetails className="d-inline">
                     <Typography>
-                        <ul className="list-group list-group-flush">
+                        <ul className="list-group list-group-flush border-dark">
                             <li className="list-group-item">Paletės:
                                 <span className="badge badge-primary badge-pill">{record.pallet}</span>
+
                             </li>
                             <li className="list-group-item">Eilutės:
                                 <span className="badge badge-primary badge-pill">{record.lines}</span>

@@ -62,6 +62,7 @@ function NavBar() {
                  <Link to="/register" onClick={() =>setOpen(!open)}>Registruotis</Link>
                  <Link to="/records" onClick={() =>setOpen(!open)}>Duomenys</Link>
                  <Link to="/add" onClick={() =>setOpen(!open)}>Prideti</Link>
+                 <Link to="/statistic" onClick={() =>setOpen(!open)}>Informacija</Link>
             </div>
         </div>
 
