@@ -42,17 +42,17 @@ function Records() {
                     <Typography>
                         <ul className="list-group list-group-flush border-dark">
                             <li className="list-group-item">Paletės:
-                                <span className="badge badge-primary badge-pill">{record.pallet}</span>
+                                <span className="badge badge-primary badge-pill float-right">{record.pallet}</span>
 
                             </li>
                             <li className="list-group-item">Eilutės:
-                                <span className="badge badge-primary badge-pill">{record.lines}</span>
+                                <span className="badge badge-primary badge-pill float-right">{record.lines}</span>
                             </li>
                             <li className="list-group-item">VIP:
-                                <span className="badge badge-primary badge-pill">{record.VIP}</span>
+                                <span className="badge badge-primary badge-pill float-right">{record.VIP}</span>
                             </li>
                             <li className="list-group-item">Valandos:
-                                <span className="badge badge-primary badge-pill">{record.hour}</span>
+                                <span className="badge badge-primary badge-pill float-right">{record.hour}</span>
                             </li>
                         </ul>
                     </Typography>

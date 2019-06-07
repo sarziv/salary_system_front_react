@@ -5,6 +5,9 @@
     font-family: 'Poppins', sans-serif;
     padding-top: 15vh;
 }
+.monthinfo {
+    font-size:  26px;
+}
 .stat-icon{
     border-radius: 50%;
     width: 100px;

@@ -52,7 +52,7 @@ function Statistic() {
                 Statistika
             </h4>
             <div className="container">
-                <div className="d-flex justify-content-center font-weight-bold">{getMonthByName()}</div>
+                <div className="d-flex justify-content-center monthinfo">{getMonthByName()}</div>
                 <div className="row">
                     <div className="col-6 d-flex justify-content-center mb-2">
                         <div className="stat-icon">
