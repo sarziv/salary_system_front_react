@@ -5,3 +5,25 @@
     font-family: 'Poppins', sans-serif;
     padding-top: 15vh;
 }
+.stat-icon{
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    background-color: #F55E27;
+}
+.stat-icon-text {
+    top: 26%;
+    width: 100px;
+    text-align: center;
+    position: absolute;
+    color: blue;
+    font-size: 26px;
+}
+.stat-icon-nameTag {
+    color: blue;
+    width: 100px;
+    background-color: white;
+    position: absolute;
+    bottom: 0px;
+    text-align: center;
+}

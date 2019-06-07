@@ -35,8 +35,14 @@ function getMonthByName() {
     }
 }
 
-const salary  = 1000;
-const hours  = 124;
+const salary = 1000;
+const hours = 124;
+const extraHours = 8;
+const pallets = 8254;
+const lines = 4554;
+const vip = 5;
+
+
 function Statistic() {
 
 
@@ -46,29 +52,59 @@ function Statistic() {
                 Statistika
             </h4>
             <div className="container">
-                <div>
-                    Mėnesis:
-                    <span className="text-white pl-2">
-                        {getMonthByName()}
-                    </span>
-                </div>
-                <div>
-                    Uždirbta:
-                    <span className="text-white pl-2">
-                        {salary} €
-                    </span>
-                </div>
-                <div>
-                    Valandos:
-                    <span className="text-white pl-2">
-                        {hours}
-                    </span>
-                </div>
-                <div>
-                    Valandinis:
-                    <span className="text-white pl-2">
-                        {(salary/hours).toFixed(1)+' '}€/h
-                    </span>
+                <div className="d-flex justify-content-center font-weight-bold">{getMonthByName()}</div>
+                <div className="row">
+                    <div className="col-6 d-flex justify-content-center mb-2">
+                        <div className="stat-icon">
+                            <div className="stat-icon-text">
+                                {1000 + ' '}€
+                            </div>
+                            <div className="stat-icon-nameTag">Uždirbta</div>
+                        </div>
+                    </div>
+
+                    <div className="col-6 d-flex justify-content-center mb-2">
+                        <div className="stat-icon">
+                            <div className="stat-icon-text">
+                                {184 + ' '}h
+                            </div>
+                            <div className="stat-icon-nameTag">Valandos</div>
+                        </div>
+                    </div>
+                    <div className="col-6 d-flex justify-content-center mb-2">
+                        <div className="stat-icon">
+                            <div className="stat-icon-text">
+                                {(salary/hours).toFixed(1) + ' '}€
+                            </div>
+                            <div className="stat-icon-nameTag">Valandinis</div>
+                        </div>
+                    </div>
+                    <div className="col-6 d-flex justify-content-center mb-2">
+                        <div className="stat-icon">
+                            <div className="stat-icon-text">
+                                {vip}
+                            </div>
+                            <div className="stat-icon-nameTag">VIP</div>
+                        </div>
+                    </div>
+                    <div className="col-6 d-flex justify-content-center mb-2">
+                        <div className="stat-icon">
+                            <div className="stat-icon-text">
+                                {pallets}
+                            </div>
+                            <div className="stat-icon-nameTag">Paletės</div>
+                        </div>
+                    </div>
+                    <div className="col-6 d-flex justify-content-center mb-2">
+                        <div className="stat-icon">
+                            <div className="stat-icon-text">
+                                {lines}
+                            </div>
+                            <div className="stat-icon-nameTag">Eilutės</div>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
         </div>
