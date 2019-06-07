@@ -6,6 +6,8 @@
     padding-top: 15vh;
 }
 .monthinfo {
+    margin-bottom: 3vh;
+    background-color: white;
     font-size:  26px;
 }
 .stat-icon{

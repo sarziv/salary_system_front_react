@@ -57,7 +57,7 @@ function Statistic() {
                     <div className="col-6 d-flex justify-content-center mb-2">
                         <div className="stat-icon">
                             <div className="stat-icon-text">
-                                {1000 + ' '}€
+                                {salary + ' '}€
                             </div>
                             <div className="stat-icon-nameTag">Uždirbta</div>
                         </div>
@@ -66,7 +66,7 @@ function Statistic() {
                     <div className="col-6 d-flex justify-content-center mb-2">
                         <div className="stat-icon">
                             <div className="stat-icon-text">
-                                {184 + ' '}h
+                                {hours + ' '}h
                             </div>
                             <div className="stat-icon-nameTag">Valandos</div>
                         </div>
@@ -103,7 +103,22 @@ function Statistic() {
                             <div className="stat-icon-nameTag">Eilutės</div>
                         </div>
                     </div>
-
+                    <div className="col-6 d-flex justify-content-center mb-2">
+                        <div className="stat-icon">
+                            <div className="stat-icon-text">
+                                {extraHours}
+                            </div>
+                            <div className="stat-icon-nameTag">Pap.Val.</div>
+                        </div>
+                    </div>
+                    <div className="col-6 d-flex justify-content-center mb-2">
+                        <div className="stat-icon">
+                            <div className="stat-icon-text">
+                                {21}
+                            </div>
+                            <div className="stat-icon-nameTag">Dienos</div>
+                        </div>
+                    </div>
 
                 </div>
             </div>
