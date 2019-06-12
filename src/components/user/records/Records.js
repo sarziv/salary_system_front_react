@@ -38,12 +38,12 @@ function Records() {
                         </div>
                     </Typography>
                 </ExpansionPanelSummary>
+                <div className="col-12">
                 <ExpansionPanelDetails className="d-inline">
                     <Typography>
                         <ul className="list-group list-group-flush border-dark">
                             <li className="list-group-item">Paletės:
                                 <span className="badge badge-primary badge-pill float-right">{record.pallet}</span>
-
                             </li>
                             <li className="list-group-item">Eilutės:
                                 <span className="badge badge-primary badge-pill float-right">{record.lines}</span>
@@ -57,6 +57,7 @@ function Records() {
                         </ul>
                     </Typography>
                 </ExpansionPanelDetails>
+                </div>
             </ExpansionPanel>
             );
 
@@ -67,11 +68,13 @@ function Records() {
     return (
         <div className="container-fluid toppading">
             <h4 className="d-flex justify-content-center">Istorija</h4>
-            <h6 className="d-flex">
+            <h6 className="container d-flex">
                 <div className="pl-3">Data</div>
                 <div className="pl-4">Uždirbta</div>
             </h6>
+            <div className="container">
            <DataDisplay userData={userData}/>
+            </div>
            <div className="bottompadding"></div>
         </div>
     );
