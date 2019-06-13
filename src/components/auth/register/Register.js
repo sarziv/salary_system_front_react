@@ -1,24 +1,27 @@
 import React, {useEffect, useState} from 'react';
 import './Register.css';
 
-const axios = require('axios');
 
 function AxiosPost(name,email,password,passwordConfirmation) {
-    axios({
-        method: 'post',
-        origin: 'http://localhost:8000/api/auth/signup',
+    let url = 'http://192.168.10.10/api/auth/signup';
+      fetch(url,
+        {
+            method: "POST",
+            mode:'no-cors',
         headers: {
-            'Access-Control-Allow-Origin': '*',
+            'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'X-Requested-With': 'XMLHttpRequest',
         },
-        data: {
-            name: name,
-            email: email,
-            password: password,
-            password_confirmation: passwordConfirmation
-        }
+            body:JSON.stringify({
+                "name": {name},
+                "email": {email},
+                "password": {password},
+                "password_confirmation": {passwordConfirmation}
+            })
     })
+.then(function(res){ console.log(res) })
+        .catch(function(res){ console.log(res) })
+
 }
 
 function Register() {
