@@ -1,6 +1,26 @@
 import React, {useEffect, useState} from 'react';
 import './Register.css';
 
+const axios = require('axios');
+
+function AxiosPost(name,email,password,passwordConfirmation) {
+    axios({
+        method: 'post',
+        origin: 'http://localhost:8000/api/auth/signup',
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest',
+        },
+        data: {
+            name: name,
+            email: email,
+            password: password,
+            password_confirmation: passwordConfirmation
+        }
+    })
+}
+
 function Register() {
 
     const [form, setForm] = useState({name: '', email: '', password: '', passwordConfirm: ''});
@@ -11,77 +31,75 @@ function Register() {
         errorPasswordNotMatch: false
     });
 
+
     const handleSubmit = (e) => {
         e.preventDefault();
-
         if ((form.name.length && form.email.length && form.password.length && form.passwordConfirm.length) === 0) {
             setError({errorMessage: true})
         } else {
             if (form.password !== form.passwordConfirm) {
                 setError({errorPasswordNotMatch: true})
+            } else {
+                AxiosPost(form.name,form.email,form.password,form.passwordConfirm);
             }
         }
-
-        alert(`Data: ${form.email} ${form.password} ${error.errorPasswordNotMatch}`)
     };
 
-    useEffect(() => {
-
-            if (form.email.length === 0) {
-                setError({errorEmail: true})
-            } else if (form.password.length === 0) {
-                setError({errorPassword: true})
-            } else if (form.email.length !== 0) {
-                setError({errorPassword: false})
-            } else if (form.password.length !== 0) {
-                setError({errorPassword: false})
-            }
-
-        }, [form]
-    );
 
 
-    return (
-        <div className="Register">
-            <h4 className="d-flex justify-content-center">
-                Registracija
-            </h4>
-            <div className="container d-flex justify-content-center">
-                <form onSubmit={handleSubmit}>
-                    <div className="container form-group py-2">
-                        <label>Vardas:</label>
-                        <input type="text" value={form.name} className="form-control"
-                               onChange={e => setForm({...form, name: e.target.value})}/>
+useEffect(() => {
 
-                        <label>Paštas:</label>
-                        <input type="text" value={form.email} className="form-control"
-                               onChange={e => setForm({...form, email: e.target.value})}/>
+        if (form.name.length === 0) {
+            setError({errorEmail: true})
+        } else if (form.email.length === 0) {
+            setError({errorEmail: true})
+        } else if (form.password.length !== 0) {
+            setError({errorPassword: true})
+        }
+    }, [form]
+);
 
-                        <label>Slaptažodis:</label>
-                        <input type="password" value={form.password} className="form-control"
-                               onChange={e => setForm({...form, password: e.target.value})}/>
+return (
+    <div className="Register">
+        <h4 className="d-flex justify-content-center">
+            Registracija
+        </h4>
+        <div className="container d-flex justify-content-center">
+            <form onSubmit={handleSubmit}>
+                <div className="container form-group py-2">
+                    <label>Vardas:</label>
+                    <input type="text" value={form.name} className="form-control"
+                           onChange={e => setForm({...form, name: e.target.value})}/>
+
+                    <label>Paštas:</label>
+                    <input type="text" value={form.email} className="form-control"
+                           onChange={e => setForm({...form, email: e.target.value})}/>
+
+                    <label>Slaptažodis:</label>
+                    <input type="password" value={form.password} className="form-control"
+                           onChange={e => setForm({...form, password: e.target.value})}/>
 
 
-                        <label>Slaptažodio patvirtinimas:</label>
-                        <input type="password" value={form.passwordConfirm} className="form-control"
-                               onChange={e => setForm({...form, passwordConfirm: e.target.value})}/>
-                        <div className="container-fluid d-flex justify-content-center bgRed mt-2">
-                            {error.errorPasswordNotMatch === true ? 'Slaptažodis nesutapo.' : ''}
-                        </div>
-                        <div className="container-fluid d-flex justify-content-center bgRed mt-2">
-                            {error.errorMessage === true ? 'Užpildyta blogai.' : ''}
-                        </div>
-                        <div className="d-flex justify-content-center py-3">
-                            <button className="btn btn-outline-light p-3" type="submit" value="submit">Registruotis
-                            </button>
-                        </div>
+                    <label>Slaptažodio patvirtinimas:</label>
+                    <input type="password" value={form.passwordConfirm} className="form-control"
+                           onChange={e => setForm({...form, passwordConfirm: e.target.value})}/>
+                    <div className="container-fluid d-flex justify-content-center bgRed mt-2">
+                        {error.errorPasswordNotMatch === true ? 'Slaptažodis nesutapo.' : ''}
                     </div>
+                    <div className="container-fluid d-flex justify-content-center bgRed mt-2">
+                        {error.errorMessage === true ? 'Užpildyta blogai.' : ''}
+                    </div>
+                    <div className="d-flex justify-content-center py-3">
+                        <button className="btn btn-outline-light p-3" type="submit" value="submit">Registruotis
+                        </button>
+                    </div>
+                </div>
 
-                </form>
-            </div>
+            </form>
         </div>
+    </div>
 
-    )
+);
 }
 
 export default Register;
