@@ -1,28 +1,6 @@
 import React, {useEffect, useState} from 'react';
+import axios from 'axios';
 import './Register.css';
-
-
-function AxiosPost(name,email,password,passwordConfirmation) {
-    let url = 'http://192.168.10.10/api/auth/signup';
-      fetch(url,
-        {
-            method: "POST",
-            mode:'no-cors',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        },
-            body:JSON.stringify({
-                "name": {name},
-                "email": {email},
-                "password": {password},
-                "password_confirmation": {passwordConfirmation}
-            })
-    })
-.then(function(res){ console.log(res) })
-        .catch(function(res){ console.log(res) })
-
-}
 
 function Register() {
 
@@ -31,11 +9,11 @@ function Register() {
         errorEmail: false,
         errorPassword: false,
         errorMessage: false,
-        errorPasswordNotMatch: false
+        errorPasswordNotMatch: false,
+        Redirecting: false
     });
 
-
-    const handleSubmit = (e) => {
+    function handleSubmit(e) {
         e.preventDefault();
         if ((form.name.length && form.email.length && form.password.length && form.passwordConfirm.length) === 0) {
             setError({errorMessage: true})
@@ -43,66 +21,103 @@ function Register() {
             if (form.password !== form.passwordConfirm) {
                 setError({errorPasswordNotMatch: true})
             } else {
-                AxiosPost(form.name,form.email,form.password,form.passwordConfirm);
+                AxiosPost(form.name, form.email, form.password, form.passwordConfirm);
+
             }
         }
-    };
+    }
+
+    function AxiosPost(name, email, password, passwordConfirmation) {
+        axios.post('http://salaryapi.local/api/auth/signup', {
+            name: name,
+            email: email,
+            password: password,
+            password_confirmation: passwordConfirmation
+        })
+            .then(function (response) {
+                setError({Redirecting: true});
+                setTimeout(redirectToLogin,5000);
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error.response)
+            });
+
+    }
+
+    function redirectToLogin() {
+        window.location = "/login";
+    }
 
 
+    useEffect(() => {
+            if (form.name.length === 0) {
+                setError({errorEmail: true})
+            } else if (form.email.length === 0) {
+                setError({errorEmail: true})
+            } else if (form.password.length !== 0) {
+                setError({errorPassword: true})
+            }
+        }, [form]
+    );
 
-useEffect(() => {
+    return (
+        <div className="Register">
+            <h4 className="d-flex justify-content-center">
+                Registracija
+            </h4>
+            <div className="container d-flex justify-content-center">
+                <form onSubmit={handleSubmit}>
+                    <div className="container form-group py-2">
+                        <label>Vardas:</label>
+                        <input type="text" value={form.name} className="form-control"
+                               onChange={e => setForm({...form, name: e.target.value})}/>
 
-        if (form.name.length === 0) {
-            setError({errorEmail: true})
-        } else if (form.email.length === 0) {
-            setError({errorEmail: true})
-        } else if (form.password.length !== 0) {
-            setError({errorPassword: true})
-        }
-    }, [form]
-);
+                        <label>Paštas:</label>
+                        <input type="email" value={form.email} className="form-control"
+                               onChange={e => setForm({...form, email: e.target.value})}/>
 
-return (
-    <div className="Register">
-        <h4 className="d-flex justify-content-center">
-            Registracija
-        </h4>
-        <div className="container d-flex justify-content-center">
-            <form onSubmit={handleSubmit}>
-                <div className="container form-group py-2">
-                    <label>Vardas:</label>
-                    <input type="text" value={form.name} className="form-control"
-                           onChange={e => setForm({...form, name: e.target.value})}/>
-
-                    <label>Paštas:</label>
-                    <input type="text" value={form.email} className="form-control"
-                           onChange={e => setForm({...form, email: e.target.value})}/>
-
-                    <label>Slaptažodis:</label>
-                    <input type="password" value={form.password} className="form-control"
-                           onChange={e => setForm({...form, password: e.target.value})}/>
+                        <label>Slaptažodis:</label>
+                        <input type="password" value={form.password} className="form-control"
+                               onChange={e => setForm({...form, password: e.target.value})}/>
 
 
-                    <label>Slaptažodio patvirtinimas:</label>
-                    <input type="password" value={form.passwordConfirm} className="form-control"
-                           onChange={e => setForm({...form, passwordConfirm: e.target.value})}/>
-                    <div className="container-fluid d-flex justify-content-center bgRed mt-2">
-                        {error.errorPasswordNotMatch === true ? 'Slaptažodis nesutapo.' : ''}
+                        <label>Slaptažodio patvirtinimas:</label>
+                        <input type="password" value={form.passwordConfirm} className="form-control"
+                               onChange={e => setForm({...form, passwordConfirm: e.target.value})}/>
+                        {/* Password did not match message */}
+                        <div className="container-fluid d-flex justify-content-center bgRed mt-2">
+                            {error.errorPasswordNotMatch === true ?
+                                <div>Slaptažodis nesutapo <i className="fas fa-exclamation-circle"> </i></div> : ''}
+                        </div>
+                        {/* Form not filled */}
+                        <div className="container-fluid d-flex justify-content-center bgRed mt-2">
+                            {error.errorMessage === true ?
+                                <div>Užpildyti laukai <i className="fas fa-exclamation-circle"> </i></div> : ''}
+                        </div>
+                        {/* Success message */}
+                        <div className="container-fluid d-flex justify-content-center bgGreen mt-2">
+                            {error.Redirecting === true ?
+                                <div>Registracija sekminga <i className="fas fa-check-circle"> </i></div> : ''}
+                        </div>
+                        <div className="d-flex justify-content-center py-2">
+                            {error.Redirecting !== true ? <button className="btn btn-outline-light p-3" type="submit"
+                                                                  value="submit">Registruotis</button>
+                                :
+                                <div>Prašome palaukti
+                                    <div className="spinner-border ml-2" role="status"
+                                         aria-hidden="true">
+                                    </div>
+                                </div>
+                            }
+                        </div>
                     </div>
-                    <div className="container-fluid d-flex justify-content-center bgRed mt-2">
-                        {error.errorMessage === true ? 'Užpildyta blogai.' : ''}
-                    </div>
-                    <div className="d-flex justify-content-center py-3">
-                        <button className="btn btn-outline-light p-3" type="submit" value="submit">Registruotis
-                        </button>
-                    </div>
-                </div>
 
-            </form>
+                </form>
+            </div>
         </div>
-    </div>
 
-);
+    );
 }
 
 export default Register;

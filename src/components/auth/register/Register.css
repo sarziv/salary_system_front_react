@@ -9,3 +9,8 @@
 .bgRed {
     background-color: red;
 }
+.bgGreen {
+    font-size: 3vh;
+    font-weight: bold;
+    background-color: green;
+}
