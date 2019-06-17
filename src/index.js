@@ -7,8 +7,10 @@ import { BrowserRouter } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.css';
 import {Provider}from "react-redux";
 import { createStore } from 'redux';
-import AuthReducers from './reducers/AuthReducers'
-const store = createStore(AuthReducers);
+import AuthReducers from './reducers/AuthReducers';
+
+window.devToolsExtension = window.__REDUX_DEVTOOLS_EXTENSION__;
+const store = createStore(AuthReducers,window.devToolsExtension && window.devToolsExtension());
 
 ReactDOM.render(
     <Provider store={store}>
