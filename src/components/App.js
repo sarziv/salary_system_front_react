@@ -24,12 +24,13 @@ const theme = createMuiTheme({
 
 function App() {
     return (
-        <div>
+
+
             <MuiThemeProvider theme={theme}>
                 <Navbar/>
                 <Main/>
             </MuiThemeProvider>
-        </div>
+
     );
 }
 

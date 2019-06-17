@@ -1,9 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import './Login.css';
 import {Link} from "react-router-dom";
+import {useSelector, useDispatch } from "react-redux";
+import axios from "axios";
 
 function Login() {
-
+    const login = useSelector(state => state.login);
+    const dispatch = useDispatch();
     const [form, setForm] = useState({email: '', password: ''});
     const [error, setError] = useState({errorEmail: false, errorPassword: false, errorMessage: false});
 
@@ -14,10 +17,23 @@ function Login() {
             setError({errorMessage: true})
         }else {
             setError({errorMessage:false})
+            AxiosLogin(form.email,form.password);
         }
 
-        alert(`Data: ${form.email} ${form.password} ${error.errorMessage}`)
     };
+    function AxiosLogin(email,password){
+        axios.post('http://salaryapi.local/api/auth/login', {
+            email: email,
+            password: password,
+        })
+            .then(function (response) {
+               dispatch({type:"LOGIN"})
+                console.log(response)
+            })
+            .catch(function (error) {
+                console.log(error.response)
+            });
+    }
 
     useEffect(() => {
             if (form.email.length === 0) {
