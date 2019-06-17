@@ -10,7 +10,7 @@ function Register() {
         errorPassword: false,
         errorMessage: false,
         errorPasswordNotMatch: false,
-        Redirecting: false
+        redirect: false
     });
 
     function handleSubmit(e) {
@@ -35,7 +35,7 @@ function Register() {
             password_confirmation: passwordConfirmation
         })
             .then(function (response) {
-                setError({Redirecting: true});
+                setError({redirect: true});
                 setTimeout(redirectToLogin,5000);
                 console.log(response);
             })
@@ -97,11 +97,11 @@ function Register() {
                         </div>
                         {/* Success message */}
                         <div className="container-fluid d-flex justify-content-center bgGreen mt-2">
-                            {error.Redirecting === true ?
+                            {error.redirect === true ?
                                 <div>Registracija sekminga <i className="fas fa-check-circle"> </i></div> : ''}
                         </div>
                         <div className="d-flex justify-content-center py-2">
-                            {error.Redirecting !== true ? <button className="btn btn-outline-light p-3" type="submit"
+                            {error.redirect !== true ? <button className="btn btn-outline-light p-3" type="submit"
                                                                   value="submit">Registruotis</button>
                                 :
                                 <div>Prašome palaukti

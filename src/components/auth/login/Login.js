@@ -1,35 +1,39 @@
-import React, { useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './Login.css';
-import {Link} from "react-router-dom";
-import {useDispatch } from "react-redux";
+import {Link, Redirect } from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
 import axios from "axios";
 
 
 function Login() {
+    //TODO ADD token to local storage ? maybe?
+    //const token = useSelector(state => state.token_type);
     const dispatch = useDispatch();
     const [form, setForm] = useState({email: '', password: ''});
-    const [error, setError] = useState({errorEmail: false, errorPassword: false, errorMessage: false});
+    const [error, setError] = useState({errorEmail: false, errorPassword: false, errorMessage: false,redirect:false});
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         if ((form.email.length && form.password.length) === 0) {
             setError({errorMessage: true})
-        }else {
-            setError({errorMessage:false});
-            AxiosLogin(form.email,form.password);
+        } else {
+            setError({errorMessage: false});
+            AxiosLogin(form.email, form.password);
         }
 
     };
 
-    function AxiosLogin(email,password){
+
+    function AxiosLogin(email, password) {
         axios.post('http://salaryapi.local/api/auth/login', {
             email: email,
             password: password,
         })
             .then(function (response) {
-                console.log(response.data.access_token);
-                dispatch({type:"LOGIN",payload: {
+                setError({redirect:true});
+                dispatch({
+                    type: "LOGIN", payload: {
                         access_token: response.data.access_token,
                         token_type: response.data.token_type,
                         expires_at: response.data.expires_at,
@@ -37,8 +41,7 @@ function Login() {
                 });
             })
             .catch(function (error) {
-                console.log(error.response)
-                dispatch({type:"LOGOUT"})
+                dispatch({type: "LOGOUT"})
             });
     }
 
