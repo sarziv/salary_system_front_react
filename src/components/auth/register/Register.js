@@ -11,6 +11,7 @@ function Register() {
         errorPassword: false,
         errorMessage: false,
         errorPasswordNotMatch: false,
+        errorEmailExist: '',
         redirect: false
     });
 
@@ -23,7 +24,6 @@ function Register() {
                 setError({errorPasswordNotMatch: true})
             } else {
                 AxiosPost(form.name, form.email, form.password, form.passwordConfirm);
-
             }
         }
     }
@@ -35,21 +35,16 @@ function Register() {
             password: password,
             password_confirmation: passwordConfirmation
         })
-            .then(function (response) {
+            .then(function () {
                 setError({redirect: true});
-                redirectToLogin();
-                console.log(response);
             })
             .catch(function (error) {
-                console.log(error.response)
+                if(error.response.data.errors.email !== undefined){
+                    setError({errorEmailExist: true})
+                }
             });
 
     }
-
-    function redirectToLogin() {
-        return <Redirect to="/login" push/>;
-    }
-
 
     useEffect(() => {
             if (form.name.length === 0) {
@@ -91,6 +86,11 @@ function Register() {
                                 {error.errorPasswordNotMatch === true ?
                                     <div>Slaptažodis nesutapo <i className="fas fa-exclamation-circle"> </i></div> : ''}
                             </div>
+                            {/* Email exists */}
+                            <div className="container-fluid d-flex justify-content-center bgRed mt-2">
+                                {error.errorEmailExist === true ?
+                                    <div>Toks paštas jau sukurtas. <i className="fas fa-exclamation-circle"> </i></div> : ''}
+                            </div>
                             {/* Form not filled */}
                             <div className="container-fluid d-flex justify-content-center bgRed mt-2">
                                 {error.errorMessage === true ?
@@ -120,7 +120,6 @@ function Register() {
 
         )
         :
-
         (<Redirect to="/login"/>);
 }
 
