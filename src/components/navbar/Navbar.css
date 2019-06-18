@@ -5,10 +5,11 @@
     z-index: 1; /* Stay on top */
     top: 0; /* Stay at the top */
     left: 0;
-    background-color: #E3E3E3; /* Black*/
+    background-color: #1951fe; /* Black*/
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 60px; /* Place content 60px from the top */
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+
 }
 .sidenavClosed {
     width: 0;
@@ -28,7 +29,8 @@
     font-size: 5vh;
     color: #F55E27;
     transition: 0.3s;
-    border-bottom: 1px solid #35AA71;
+    border-bottom: 1px solid #E3E3E3;
+
 }
 
 /* When you mouse over the navigation links, change their color */

@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import {Redirect} from 'react-router-dom';
 import axios from 'axios';
 import './Register.css';
 
@@ -36,7 +37,7 @@ function Register() {
         })
             .then(function (response) {
                 setError({redirect: true});
-                setTimeout(redirectToLogin,5000);
+                redirectToLogin();
                 console.log(response);
             })
             .catch(function (error) {
@@ -46,7 +47,7 @@ function Register() {
     }
 
     function redirectToLogin() {
-        window.location = "/login";
+        return <Redirect to="/login" push/>;
     }
 
 
@@ -61,63 +62,66 @@ function Register() {
         }, [form]
     );
 
-    return (
-        <div className="Register">
-            <h4 className="d-flex justify-content-center">
-                Registracija
-            </h4>
-            <div className="container d-flex justify-content-center">
-                <form onSubmit={handleSubmit}>
-                    <div className="container form-group py-2">
-                        <label>Vardas:</label>
-                        <input type="text" value={form.name} className="form-control"
-                               onChange={e => setForm({...form, name: e.target.value})}/>
+    return error.redirect !== true ? (
+            <div className="Register">
+                <h4 className="d-flex justify-content-center">
+                    Registracija
+                </h4>
+                <div className="container d-flex justify-content-center">
+                    <form onSubmit={handleSubmit}>
+                        <div className="container form-group py-2">
+                            <label>Vardas:</label>
+                            <input type="text" value={form.name} className="form-control"
+                                   onChange={e => setForm({...form, name: e.target.value})}/>
 
-                        <label>Paštas:</label>
-                        <input type="email" value={form.email} className="form-control"
-                               onChange={e => setForm({...form, email: e.target.value})}/>
+                            <label>Paštas:</label>
+                            <input type="email" value={form.email} className="form-control"
+                                   onChange={e => setForm({...form, email: e.target.value})}/>
 
-                        <label>Slaptažodis:</label>
-                        <input type="password" value={form.password} className="form-control"
-                               onChange={e => setForm({...form, password: e.target.value})}/>
+                            <label>Slaptažodis:</label>
+                            <input type="password" value={form.password} className="form-control"
+                                   onChange={e => setForm({...form, password: e.target.value})}/>
 
 
-                        <label>Slaptažodio patvirtinimas:</label>
-                        <input type="password" value={form.passwordConfirm} className="form-control"
-                               onChange={e => setForm({...form, passwordConfirm: e.target.value})}/>
-                        {/* Password did not match message */}
-                        <div className="container-fluid d-flex justify-content-center bgRed mt-2">
-                            {error.errorPasswordNotMatch === true ?
-                                <div>Slaptažodis nesutapo <i className="fas fa-exclamation-circle"> </i></div> : ''}
-                        </div>
-                        {/* Form not filled */}
-                        <div className="container-fluid d-flex justify-content-center bgRed mt-2">
-                            {error.errorMessage === true ?
-                                <div>Užpildyti laukai <i className="fas fa-exclamation-circle"> </i></div> : ''}
-                        </div>
-                        {/* Success message */}
-                        <div className="container-fluid d-flex justify-content-center bgGreen mt-2">
-                            {error.redirect === true ?
-                                <div>Registracija sekminga <i className="fas fa-check-circle"> </i></div> : ''}
-                        </div>
-                        <div className="d-flex justify-content-center py-2">
-                            {error.redirect !== true ? <button className="btn btn-outline-light p-3" type="submit"
-                                                                  value="submit">Registruotis</button>
-                                :
-                                <div>Prašome palaukti
-                                    <div className="spinner-border ml-2" role="status"
-                                         aria-hidden="true">
+                            <label>Slaptažodio patvirtinimas:</label>
+                            <input type="password" value={form.passwordConfirm} className="form-control"
+                                   onChange={e => setForm({...form, passwordConfirm: e.target.value})}/>
+                            {/* Password did not match message */}
+                            <div className="container-fluid d-flex justify-content-center bgRed mt-2">
+                                {error.errorPasswordNotMatch === true ?
+                                    <div>Slaptažodis nesutapo <i className="fas fa-exclamation-circle"> </i></div> : ''}
+                            </div>
+                            {/* Form not filled */}
+                            <div className="container-fluid d-flex justify-content-center bgRed mt-2">
+                                {error.errorMessage === true ?
+                                    <div>Užpildyti laukai <i className="fas fa-exclamation-circle"> </i></div> : ''}
+                            </div>
+                            {/* Success message */}
+                            <div className="container-fluid d-flex justify-content-center bgGreen mt-2">
+                                {error.redirect === true ?
+                                    <div>Registracija sekminga <i className="fas fa-check-circle"> </i></div> : ''}
+                            </div>
+                            <div className="d-flex justify-content-center py-2">
+                                {error.redirect !== true ? <button className="btn btn-outline-light p-3" type="submit"
+                                                                   value="submit">Registruotis</button>
+                                    :
+                                    <div>Prašome palaukti
+                                        <div className="spinner-border ml-2" role="status"
+                                             aria-hidden="true">
+                                        </div>
                                     </div>
-                                </div>
-                            }
+                                }
+                            </div>
                         </div>
-                    </div>
 
-                </form>
+                    </form>
+                </div>
             </div>
-        </div>
 
-    );
+        )
+        :
+
+        (<Redirect to="/login"/>);
 }
 
 export default Register;

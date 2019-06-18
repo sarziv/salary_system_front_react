@@ -1,16 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import './Login.css';
-import {Link, Redirect } from "react-router-dom";
+import {Link,Redirect} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import axios from "axios";
 
 
+
 function Login() {
-    //TODO ADD token to local storage ? maybe?
-    //const token = useSelector(state => state.token_type);
+    const auth = useSelector(state => state.authenticated);
     const dispatch = useDispatch();
-    const [form, setForm] = useState({email: '', password: ''});
-    const [error, setError] = useState({errorEmail: false, errorPassword: false, errorMessage: false,redirect:false});
+    const [form, setForm] = useState({email: 'asdasdds@gmail.com', password: 'asdasdds@gmail.com'});
+    const [error, setError] = useState({errorEmail: false, errorPassword: false, errorMessage: false, redirect: false});
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -31,16 +31,17 @@ function Login() {
             password: password,
         })
             .then(function (response) {
-                setError({redirect:true});
+                setError({redirect: true});
                 dispatch({
                     type: "LOGIN", payload: {
+                        authenticated: true,
                         access_token: response.data.access_token,
                         token_type: response.data.token_type,
                         expires_at: response.data.expires_at,
                     }
                 });
             })
-            .catch(function (error) {
+            .catch(function () {
                 dispatch({type: "LOGOUT"})
             });
     }
@@ -59,7 +60,7 @@ function Login() {
         }, [form]
     );
 
-    return (
+    return auth !== true ? (
         <div className="login">
             <h4 className="d-flex justify-content-center">
                 Prisijungimas
@@ -97,8 +98,9 @@ function Login() {
                 </Link>
             </div>
         </div>
-
-    )
+    ) : (
+      <Redirect to="/statistic"/>
+    );
 }
 
 export default Login;

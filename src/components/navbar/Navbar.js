@@ -6,6 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Logo from '../../image/bls-s-s_logo.png';
 import './Navbar.css';
 import { Link } from "react-router-dom";
+import {useSelector,useDispatch} from "react-redux";
 
 //Top navbar
 const styles = {
@@ -26,7 +27,8 @@ const styles = {
 };
 
 function NavBar() {
-
+    const dispatch = useDispatch();
+    const auth = useSelector(state=>state.authenticated);
     const [open, setOpen] = useState(false);
     const [navbar, setNavbar] = useState({iconParams :{icon: 'bars',iconColor:'faBars'}, sidebar: 'sidenavClosed'});
 
@@ -57,15 +59,22 @@ function NavBar() {
                 </Toolbar>
             </AppBar>
             <div className={"sidenav " + navbar.sidebar}>
-                 <Link to="/" onClick={() =>setOpen(!open)}>Pagrindinis</Link>
-                 <Link to="/login" onClick={() =>setOpen(!open)}>Prisijungti</Link>
-                 <Link to="/register" onClick={() =>setOpen(!open)}>Registruotis</Link>
-                 <Link to="/records" onClick={() =>setOpen(!open)}>Duomenys</Link>
-                 <Link to="/add" onClick={() =>setOpen(!open)}>Prideti</Link>
-                 <Link to="/statistic" onClick={() =>setOpen(!open)}>Statistika</Link>
+                {   auth !== true ?
+                    <div>
+                        <Link to="/" onClick={() =>setOpen(!open)}>Pagrindinis</Link>
+                        <Link to="/login" onClick={() =>setOpen(!open)}>Prisijungti</Link>
+                        <Link to="/register" onClick={() =>setOpen(!open)}>Registruotis</Link>
+                    </div>
+                    :
+                    <div>
+                        <Link to="/statistic" onClick={() =>setOpen(!open)}>Informacija</Link>
+                        <Link to="/add" onClick={() =>setOpen(!open)}>Prideti</Link>
+                        <Link to="/records" onClick={() =>setOpen(!open)}>Duomenys</Link>
+                        <Link to="/logout" onClick={() =>setOpen(!open)}>Atsijungti</Link>
+                    </div>
+                }
             </div>
         </div>
-
     );
 }
 
