@@ -24,6 +24,6 @@ function Logout() {
 
     axiosLogout();
 
-    return error === true ? (<Redirect to="/"/>) : (<Redirect to="/login"/>);
+    return error !== true ? (<Redirect to="/"/>) : (<Redirect to="/login"/>);
 }
 export default Logout;
