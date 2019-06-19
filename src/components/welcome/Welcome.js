@@ -18,7 +18,10 @@ function Welcome() {
                     <div className="bls"><h5>Prisijunk prie komandos!</h5></div>
                     <div className="joinButton">
                         <Link to="/login">
-                        <button className="btn btn-outline-light p-3">Prisijungti</button>
+                        <button className="btn btn-outline-light p-3 mr-3">Prisijungti</button>
+                        </Link>
+                        <Link to="/register">
+                            <button className="btn btn-outline-light p-3">Registruokis</button>
                         </Link>
                     </div>
                 </div>
