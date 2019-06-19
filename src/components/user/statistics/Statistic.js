@@ -1,6 +1,7 @@
 import React from 'react';
 import './Statistic.css';
-
+import {Redirect} from "react-router-dom";
+import {useSelector} from "react-redux";
 
 function getMonthByName() {
     const date = new Date().getMonth() + 1;
@@ -44,9 +45,9 @@ const vip = 5;
 
 
 function Statistic() {
+    const auth = useSelector(state => state.authenticated);
 
-
-    return (
+    return auth === true ? (
         <div className="toppading">
             <h4 className="d-flex justify-content-center">
                 Statistika
@@ -106,7 +107,7 @@ function Statistic() {
                 </div>
             </div>
         </div>
-    );
+    ) : (<Redirect to="/"/>);
 }
 
 export default Statistic;

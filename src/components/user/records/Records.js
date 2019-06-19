@@ -10,7 +10,6 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 function Records() {
 
-
     const userData = [
         {id:1,date:'5-25',pallet:250,lines:250,VIP:1,hour:1},
         {id:2,date:'5-24',pallet:251,lines:251,VIP:1,hour:1},

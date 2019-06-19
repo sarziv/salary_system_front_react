@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
 import './Add.css';
+import {Redirect} from "react-router-dom";
+import {useSelector} from "react-redux";
 
 function Add() {
     const [add, setAdd] = useState({pallet: '', lines: '', vip: 0, hours: 0});
     const [error, setError] = useState(false);
-
+    const auth = useSelector(state => state.authenticated);
     /*
         function primeApi() {
             //TODO price api pallet,lines,hours,vip
@@ -23,7 +25,7 @@ function Add() {
 
     }
 
-    return (
+    return auth === true ? (
         <div className="toppading">
             <h4 className="d-flex justify-content-center">
                 Pridėti
@@ -84,8 +86,7 @@ function Add() {
                 </form>
             </div>
         </div>
-    );
-
+    ) : (<Redirect to="/"/>);
 }
 
 export default Add;

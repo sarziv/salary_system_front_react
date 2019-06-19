@@ -8,6 +8,7 @@ import Records from '../user/records/Records';
 import Add from '../user/add/Add';
 import Statistic from "../user/statistics/Statistic";
 import Logout from "../auth/logout/Logout";
+import Search from "../user/search/Search"
 
 
 function Routing() {
@@ -23,6 +24,7 @@ function Routing() {
                     <Route path="/records" exact component={Records}/>
                     <Route path="/add" exact component={Add}/>
                     <Route path="/statistic" exact component={Statistic}/>
+                    <Route path="/search" exact component={Search}/>
                     <Route path="/logout" exact component={Logout}/>
                     </Switch>
 
