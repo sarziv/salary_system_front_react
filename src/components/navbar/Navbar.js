@@ -70,6 +70,7 @@ function NavBar() {
                         <Link to="/add" onClick={() =>setOpen(!open)}>Prideti</Link>
                         <Link to="/records" onClick={() =>setOpen(!open)}>Duomenys</Link>
                         <div className="logoutButton"> <Link to="/logout" onClick={() =>setOpen(!open)}>Atsijungti</Link></div>
+                        <div className="logoutButton"> <Link to="/logout" onClick={() =>setOpen(!open)}>Atsijungti</Link></div>
                     </div>
                 }
             </div>
