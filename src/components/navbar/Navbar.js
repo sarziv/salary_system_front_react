@@ -6,7 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Logo from '../../image/bls-s-s_logo.png';
 import './Navbar.css';
 import { Link } from "react-router-dom";
-import {useSelector,useDispatch} from "react-redux";
+import {useSelector} from "react-redux";
 
 //Top navbar
 const styles = {
@@ -27,7 +27,6 @@ const styles = {
 };
 
 function NavBar() {
-    const dispatch = useDispatch();
     const auth = useSelector(state=>state.authenticated);
     const [open, setOpen] = useState(false);
     const [navbar, setNavbar] = useState({iconParams :{icon: 'bars',iconColor:'faBars'}, sidebar: 'sidenavClosed'});
@@ -44,7 +43,7 @@ function NavBar() {
                 })
             }
         }, [open],
-    )
+    );
 
     return (
         <div style={styles.root}>
@@ -54,7 +53,7 @@ function NavBar() {
                     <Typography variant="h6" style={styles.grow}>
                     </Typography>
                     <IconButton onClick={() => setOpen(!open)} style={styles.menuButton} aria-label="Menu">
-                        <i className={"fas fa-" + navbar.iconParams.icon +' '+ navbar.iconParams.Color}></i>
+                        <i className={"fas fa-" + navbar.iconParams.icon +' '+ navbar.iconParams.Color}> </i>
                     </IconButton>
                 </Toolbar>
             </AppBar>
