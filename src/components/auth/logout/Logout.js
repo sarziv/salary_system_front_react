@@ -2,7 +2,7 @@ import React,{useState} from 'react';
 import {Redirect} from "react-router-dom";
 import axios from "axios";
 import {useDispatch,useSelector} from "react-redux";
-
+import * as API from '../../router/Api'
 
 
 function Logout() {
@@ -12,7 +12,7 @@ function Logout() {
     const [error,setError] = useState(false);
 
     function axiosLogout() {
-        axios.get('http://salaryapi.local/api/auth/logout', {params:{},headers:{'Authorization':'Bearer '+access_token}})
+        axios.get(API.LOGOUT, {params:{},headers:{'Authorization':'Bearer '+access_token}})
             .then(function () {
                 setError(false);
                 dispatch({type:'LOGOUT'});

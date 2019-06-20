@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Redirect} from 'react-router-dom';
 import axios from 'axios';
 import './Register.css';
+import * as API from '../../router/Api'
 
 function Register() {
 
@@ -29,7 +30,7 @@ function Register() {
     }
 
     function AxiosPost(name, email, password, passwordConfirmation) {
-        axios.post('http://salaryapi.local/api/auth/signup', {
+        axios.post(API.SIGNUP, {
             name: name,
             email: email,
             password: password,

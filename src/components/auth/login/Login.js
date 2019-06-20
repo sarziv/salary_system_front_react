@@ -3,8 +3,7 @@ import './Login.css';
 import {Link,Redirect} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import axios from "axios";
-
-
+import * as API from '../../router/Api'
 
 function Login() {
     const auth = useSelector(state => state.authenticated);
@@ -26,7 +25,7 @@ function Login() {
 
 
     function AxiosLogin(email, password) {
-        axios.post('http://salaryapi.local/api/auth/login', {
+        axios.post(API.LOGIN, {
             email: email,
             password: password,
         })
