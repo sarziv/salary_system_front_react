@@ -3,9 +3,13 @@ import './Loading.css';
 
 function Loading() {
 
-    return (    <div className="lds-circle">
-                    <div> </div>
-               </div>
+    return (
+             <div className="d-flex justify-content-center">
+                   <div className="lds-circle">
+                     <div> </div>
+                  </div>
+             </div>
+
             );
 
 }
