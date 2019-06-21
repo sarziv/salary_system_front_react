@@ -9,7 +9,7 @@ import axios from 'axios';
 import * as API from "../../router/Api";
 import {useSelector} from "react-redux";
 import Loading from '../../miscellaneous/loading/Loading';
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 
 function Records() {
     const auth = useSelector(state => state.authenticated);
@@ -24,8 +24,6 @@ function Records() {
                 //TODO REMOVE change to access_token
                 headers: {'Authorization': 'Bearer ' + access_token}
             })
-            //"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImJiMDYzZTU1ZWI0YWQ0NTNlNWU1ZGE3MmNkMTY2MzIyNzAyY2EwMWFmZmIzMDA0NTBkNmNiYWRlNDhkNzkwODE2OTZhMmQwYWY0NWFkMDAzIn0.eyJhdWQiOiIxIiwianRpIjoiYmIwNjNlNTVlYjRhZDQ1M2U1ZTVkYTcyY2QxNjYzMjI3MDJjYTAxYWZmYjMwMDQ1MGQ2Y2JhZGU0OGQ3OTA4MTY5NmEyZDBhZjQ1YWQwMDMiLCJpYXQiOjE1NjEwNjA2NTksIm5iZiI6MTU2MTA2MDY1OSwiZXhwIjoxNTkyNjgzMDU5LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.qrGBvhg3qjYIoc9N6-eS12e53iShvn0ix0dwQQSYRAXPFsKKh27A_bstBCiJ650AxncBkKXYTEYkKUZpur-Q4XAc9v03w8TRhqDbhK_DtWHVJ0Gw4cq5sm6Dx4tfTf08oFpbYA5daIx_CPmxGU2LQ3N6kEZBBIjCpPaWFpQGHnX2q_fPt4eWGSt93QhorPLMsuNbhtrLSgwQGQ1bqkxpljCyH7BLkn1LWZZWp0YrTeQPlZFiALTBDmcOyaGOuiUbSAujeuGX5s_5-YPPU56VFqDc4VvYeWpJpDs-V-zMk1cN84ku2tXBju0dqkoRvjBYjKeLe_orTa66VaLBw29oFI7lQsZby2CgptLaa8KLtqq7ZUcS7mqfgKS9goDbPDeR_VYG-aNexPToz3fNc0IH4qA7gyWujXXhRccWtq7ti0AF9-NSJ6r2stof8WogZPXH7YF0maTujTZSv-kHOshi-h22V8IhlN0kcbZMgYfndEf13tvzaoHQ0aQASO7YkoRP2I45xsPNF-hXJYwhT64aBXuGPl9_UBGsODKjRgeixTLmECgHLxWGnJJjb8PGpyCDYW1gwbJyiXOtIPCwMzyiybxvk_nnjarFFBIhzoTs8y2hqGBiqEFdyGu8J1nJe2ATkgOUq3S8OXz18-kGwJqAKjbEUIom2MPjlFt6jJvbIvE"}
-            //})
                 .then(function (response) {
                     const list = response.data;
                     setRecords({data: list});
@@ -51,6 +49,7 @@ function Records() {
 
         //if No records
         if (records.data.length !== 0) {
+            //TODO unique key
             const listDisplay = records.data.map((record) =>
                 <ExpansionPanel>
                     <ExpansionPanelSummary
@@ -110,8 +109,7 @@ function Records() {
         }
     }
 
-    //TODO Remove after
-    return /*auth === true ? */(
+    return auth === true ? (
         <div className="container-fluid toppading">
             <h4 className="d-flex justify-content-center">Istorija</h4>
             <h6 className="d-flex justify-content-center">5 paskutiniai</h6>
@@ -120,7 +118,7 @@ function Records() {
             </div>
             <div className="bottompadding"></div>
         </div>
-    ) /*: (<Redirect to="/"/>)*/;
+    ) : (<Redirect to="/"/>);
 }
 
 export default Records;
