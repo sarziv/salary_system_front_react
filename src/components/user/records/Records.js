@@ -8,12 +8,13 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import axios from 'axios';
 import * as API from "../../router/Api";
 import {useSelector} from "react-redux";
-
+import Loading from '../../miscellaneous/loading/Loading';
 
 function Records() {
     const auth = useSelector(state => state.authenticated);
     const access_token = useSelector(state => state.access_token);
     const [records, setRecords] = useState({data: [{}]});
+    const [loading, setLoading] = useState({error:true,message:''});
 
     //TODO Loading animation
 
@@ -27,9 +28,10 @@ function Records() {
                 .then(function (response) {
                     const list = response.data;
                     setRecords({data: list});
-                    console.log(list);
+                    setLoading({...loading,error:false});
                 })
                 .catch(function (error) {
+
                 });
         };
         fetchData();
@@ -86,9 +88,14 @@ function Records() {
                 </div>
             </ExpansionPanel>
         );
-        return (
+        return loading.error !== true ? (
             listDisplay
-        )
+
+        ) : (
+            <div className="d-flex justify-content-center">
+                <Loading/>
+            </div>
+            )
     }
 
     //TODO Remove after
