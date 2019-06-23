@@ -12,9 +12,11 @@ function Register() {
         errorPassword: false,
         errorMessage: false,
         errorPasswordNotMatch: false,
-        errorEmailExist: '',
-        redirect: false
+        errorEmailExist: false,
+        redirect: false,
+        redirectAnimation:false
     });
+
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -29,6 +31,11 @@ function Register() {
         }
     }
 
+
+    function redirectToLogin() {
+        setError({redirect: true});
+    }
+
     function AxiosPost(name, email, password, passwordConfirmation) {
         axios.post(API.SIGNUP, {
             name: name,
@@ -37,14 +44,14 @@ function Register() {
             password_confirmation: passwordConfirmation
         })
             .then(function () {
-                setError({redirect: true});
+                setError({redirectAnimation: true})
+                setTimeout(redirectToLogin,3000);
             })
             .catch(function (error) {
                 if(error.response.data.errors.email !== undefined){
                     setError({errorEmailExist: true})
                 }
             });
-
     }
 
     useEffect(() => {
@@ -95,15 +102,15 @@ function Register() {
                             {/* Form not filled */}
                             <div className="container-fluid d-flex justify-content-center bgRed mt-2">
                                 {error.errorMessage === true ?
-                                    <div>Užpildyti laukai <i className="fas fa-exclamation-circle"> </i></div> : ''}
+                                    <div>Neužpildyti laukai <i className="fas fa-exclamation-circle"> </i></div> : ''}
                             </div>
                             {/* Success message */}
                             <div className="container-fluid d-flex justify-content-center bgGreen mt-2">
-                                {error.redirect === true ?
+                                {error.redirectAnimation === true ?
                                     <div>Registracija sekminga <i className="fas fa-check-circle"> </i></div> : ''}
                             </div>
                             <div className="d-flex justify-content-center py-2">
-                                {error.redirect !== true ? <button className="btn btn-outline-light p-3" type="submit"
+                                {error.redirectAnimation !== true ? <button className="btn btn-outline-light p-3" type="submit"
                                                                    value="submit">Registruotis</button>
                                     :
                                     <div>Prašome palaukti
