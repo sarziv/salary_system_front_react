@@ -7,6 +7,7 @@ function Add() {
     const [add, setAdd] = useState({pallet: '', lines: '', vip: 0, hours: 0});
     const [error, setError] = useState(false);
     const auth = useSelector(state => state.authenticated);
+
     /*
         function primeApi() {
             //TODO price api pallet,lines,hours,vip

@@ -43,14 +43,14 @@ function Records() {
             //TODO RateController API
             return (lines * 0.09 + pallet * 0.11 + vip * 3 + extraHour * 6).toFixed(1);
         }
-        
+
         function formatDate(date) {
             return moment(date).format('YYYY-MM-DD');
         }
 
         //if No records
         if (records.data.length !== 0) {
-            //TODO unique key
+            //TODO Delete , edit records
             const listDisplay = records.data.map((record) =>
                 <ExpansionPanel key={record.id}>
                     <ExpansionPanelSummary
@@ -84,9 +84,6 @@ function Records() {
                                     <li className="list-group-item">Valandos:
                                         <span
                                             className="badge badge-primary badge-pill float-right">{record.extra_hour}</span>
-                                    </li>
-                                    <li className="list-group-item">
-                                        <button className="btn btn-outline-danger">Ištrinti</button>
                                     </li>
                                 </ul>
                             </Typography>
