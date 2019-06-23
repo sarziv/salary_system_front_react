@@ -12,7 +12,7 @@ function Logout() {
     const [error,setError] = useState(false);
 
     function axiosLogout() {
-        axios.get(API.LOGOUT, {params:{},headers:{'Authorization':'Bearer '+access_token}})
+        axios.get(API.LOGOUT, {params:{},headers:{'Authorization':'Bearer '+ access_token}})
             .then(function () {
                 setError(false);
                 dispatch({type:'LOGOUT'});

@@ -10,6 +10,7 @@ import * as API from "../../router/Api";
 import {useSelector} from "react-redux";
 import Loading from '../../miscellaneous/loading/Loading';
 import {Link, Redirect} from "react-router-dom";
+import moment from 'moment';
 
 function Records() {
     const auth = useSelector(state => state.authenticated);
@@ -34,24 +35,24 @@ function Records() {
                 });
         };
         fetchData();
-    }, [])
+    }, [access_token])
 
     function DataDisplay() {
 
         function CountMoney(lines, pallet, vip, extraHour) {
+            //TODO RateController API
             return (lines * 0.09 + pallet * 0.11 + vip * 3 + extraHour * 6).toFixed(1);
         }
-
-        //TODO Format to YYYY-MM-DD
+        
         function formatDate(date) {
-            return date;
+            return moment(date).format('YYYY-MM-DD');
         }
 
         //if No records
         if (records.data.length !== 0) {
             //TODO unique key
             const listDisplay = records.data.map((record) =>
-                <ExpansionPanel>
+                <ExpansionPanel key={record.id}>
                     <ExpansionPanelSummary
                         expandIcon={<ExpandMoreIcon/>}
                         aria-controls="panel1a-content"
@@ -83,6 +84,9 @@ function Records() {
                                     <li className="list-group-item">Valandos:
                                         <span
                                             className="badge badge-primary badge-pill float-right">{record.extra_hour}</span>
+                                    </li>
+                                    <li className="list-group-item">
+                                        <button className="btn btn-outline-danger">Ištrinti</button>
                                     </li>
                                 </ul>
                             </Typography>
