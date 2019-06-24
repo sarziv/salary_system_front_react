@@ -3,16 +3,25 @@ import './Add.css';
 import {Redirect} from "react-router-dom";
 import {useSelector} from "react-redux";
 
+
 function Add() {
     const [add, setAdd] = useState({pallet: '', lines: '', vip: 0, hours: 0});
     const [error, setError] = useState(false);
-    const auth = useSelector(state => state.authenticated);
+    const auth = useSelector(state => state.AuthReducer.authenticated);
+    const rate_pallet = useSelector(state => state.RateReducer.rate_pallet);
+    const rate_lines = useSelector(state => state.RateReducer.rate_lines);
+    const rate_vip = useSelector(state => state.RateReducer.rate_vip);
+    const rate_extraHour = useSelector(state => state.RateReducer.rate_extraHour);
 
-    /*
-        function primeApi() {
-            //TODO price api pallet,lines,hours,vip
-        }
-    */
+
+    function CountMoney(pallet,lines,vip,extraHour) {
+        return  (pallet * rate_pallet +
+                lines * rate_lines +
+                vip * rate_vip +
+                extraHour * rate_extraHour).toFixed(1);
+    }
+
+
     function handlerSubmit(e) {
         e.preventDefault();
 
@@ -73,7 +82,7 @@ function Add() {
                     <div className="form-inline d-flex justify-content-center pt-3">
                         <label htmlFor="exampleInputSalary">Uždirbta:</label>
                         <div id="exampleInputSalary" className="SalaryCount mb-2 pl-2">
-                            {((add.pallet * 0.11) + (add.lines * 0.09) + (add.vip * 3) + (add.hours * 7)).toFixed(2)}€
+                            {CountMoney(add.pallet,add.lines,add.vip,add.hours)}€
                         </div>
                     </div>
                     <div

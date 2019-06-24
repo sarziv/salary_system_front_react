@@ -27,7 +27,7 @@ const styles = {
 };
 
 function NavBar() {
-    const auth = useSelector(state=>state.authenticated);
+    const auth = useSelector(state=>state.AuthReducer.authenticated);
     const [open, setOpen] = useState(false);
     const [navbar, setNavbar] = useState({iconParams :{icon: 'bars',iconColor:'faBars'}, sidebar: 'sidenavClosed'});
 

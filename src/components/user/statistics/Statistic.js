@@ -45,7 +45,7 @@ const vip = 5;
 
 
 function Statistic() {
-    const auth = useSelector(state => state.authenticated);
+    const auth = useSelector(state => state.AuthReducer.authenticated);
 
     return auth === true ? (
         <div className="toppading">

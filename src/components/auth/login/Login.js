@@ -3,14 +3,13 @@ import './Login.css';
 import {Link,Redirect} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import axios from "axios";
-import * as API from '../../router/Api'
+import * as API from '../../router/Api';
 
 function Login() {
-    const auth = useSelector(state => state.authenticated);
+    const auth = useSelector(state => state.AuthReducer.authenticated);
     const dispatch = useDispatch();
     const [form, setForm] = useState({email: 'asdasdds@gmail.com', password: 'asdasdds@gmail.com'});
     const [error, setError] = useState({errorEmail: false, errorPassword: false, errorMessage: false, redirect: false});
-
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -22,6 +21,24 @@ function Login() {
         }
 
     };
+    function get_rates() {
+        axios.get(API.RATE, {})
+            .then(function (response) {
+                const rates = response.data[0];
+                dispatch({
+                    type: "GET_RATES", payload: {
+                        rate_pallet: rates.pallet,
+                        rate_lines: rates.lines,
+                        rate_vip: rates.vip,
+                        rate_extraHour: rates.extraHour,
+                    }
+            });
+
+        }).catch(function () {
+            //TODO Redirect to error page
+        });
+        ;
+    }
 
 
     function AxiosLogin(email, password) {
@@ -39,6 +56,7 @@ function Login() {
                         expires_at: response.data.expires_at,
                     }
                 });
+                get_rates();
             })
             .catch(function () {
                 dispatch({type: "LOGOUT"})

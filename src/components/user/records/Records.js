@@ -13,8 +13,8 @@ import {Link, Redirect} from "react-router-dom";
 import moment from 'moment';
 
 function Records() {
-    const auth = useSelector(state => state.authenticated);
-    const access_token = useSelector(state => state.access_token);
+    const auth = useSelector(state => state.AuthReducer.authenticated);
+    const access_token = useSelector(state => state.AuthReducer.access_token);
     const [records, setRecords] = useState({data: [{}]});
     const [loading, setLoading] = useState(true);
 
@@ -22,7 +22,6 @@ function Records() {
         async function fetchData() {
             await axios.get(API.RECORDS, {
                 params: {},
-                //TODO REMOVE change to access_token
                 headers: {'Authorization': 'Bearer ' + access_token}
             })
                 .then(function (response) {
@@ -41,7 +40,7 @@ function Records() {
 
         function CountMoney(lines, pallet, vip, extraHour) {
             //TODO RateController API
-            return (lines * 0.09 + pallet * 0.11 + vip * 3 + extraHour * 6).toFixed(1);
+            return (lines + pallet * 0.11 + vip * 3 + extraHour * 6).toFixed(1);
         }
 
         function formatDate(date) {

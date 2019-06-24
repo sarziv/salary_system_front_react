@@ -16,6 +16,7 @@ function Logout() {
             .then(function () {
                 setError(false);
                 dispatch({type:'LOGOUT'});
+                dispatch({type:'RATE_LOGOUT'});
             })
             .catch(function () {
                 setError(true);
