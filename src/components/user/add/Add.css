@@ -17,11 +17,19 @@ html {
 .SalaryCount{
     color: white;
 }
-.error {
+.errorMessage {
     color: black;
      display: block;
      background-color: red;
  }
 .errorHide {
     visibility: hidden;
+}
+.successHide {
+    visibility: hidden;
+}
+.successMessage {
+    color: #F55E27;
+    display: block;
+    background-color: green;
 }

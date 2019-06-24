@@ -8,7 +8,8 @@ import * as API from "../../router/Api";
 
 function Add() {
     const [add, setAdd] = useState({pallet: '', lines: '', vip: 0, hours: 0});
-    const [error, setError] = useState(false);
+    const [error, setError] = useState({field: false, redirect: false, redirectAnimation: false, server: false});
+
     const auth = useSelector(state => state.AuthReducer.authenticated);
     const access_token = useSelector(state => state.AuthReducer.access_token);
     const rate_pallet = useSelector(state => state.RateReducer.rate_pallet);
@@ -17,58 +18,65 @@ function Add() {
     const rate_extraHour = useSelector(state => state.RateReducer.rate_extraHour);
 
 
-    function CountMoney(pallet,lines,vip,extraHour) {
-        return  (pallet * rate_pallet +
-                lines * rate_lines +
-                vip * rate_vip +
-                extraHour * rate_extraHour).toFixed(1);
+    function CountMoney(pallet, lines, vip, extraHour) {
+        return (pallet * rate_pallet +
+            lines * rate_lines +
+            vip * rate_vip +
+            extraHour * rate_extraHour).toFixed(1);
     }
-    
-    
-   async function AxiosAdd() {
-       await axios.post(API.ADD,{
-             headers: {'Authorization': 'Bearer ' + access_token},
-             pallet: add.pallet,
-             lines: add.lines,
-             vip: add.vip,
-             extra_Hour: add.hours,
-        })
+
+    function redirectToRecords() {
+        setError({redirect: true});
+    }
+
+    async function AxiosAdd() {
+        await axios.post(API.ADD,
+            {
+                pallet: add.pallet,
+                lines: add.lines,
+                vip: add.vip,
+                extra_hour: add.hours,
+            },
+            {
+                headers: {'Authorization': 'Bearer ' + access_token},
+            })
             .then(function (response) {
                 console.log(response);
+                setError({redirectAnimation: true});
+                setTimeout(redirectToRecords, 3000);
             })
             .catch(function (error) {
                 console.log(error.response);
-                //TODO Error
+                setError({server: true});
             });
     }
 
-
     function handlerSubmit(e) {
         e.preventDefault();
-
         if (add.pallet.length === 0) {
-            setError(true);
+            setError({field: true});
         } else if (add.lines.length === 0) {
-            setError(true);
+            setError({field: true});
         } else {
-            setError(false);
+            setError({field: false});
+            AxiosAdd();
         }
+    }
 
+    if (error.redirect === true) {
+        return <Redirect to="/records"/>
     }
 
     return auth === true ? (
         <div className="toppading">
-            <h4 className="d-flex justify-content-center">
-                Pridėti
-            </h4>
             <div className="container d-flex justify-content-center">
                 <form onSubmit={handlerSubmit}>
-                    <div className="form-group">
+                    <div className="form-group col-6 offset-3 text-center">
                         <label htmlFor="palletAdd">Paletės</label>
                         <input min={0} type="number" className="form-control" id="palletAdd" value={add.pallet}
                                onChange={e => setAdd({...add, pallet: e.target.value})}/>
                     </div>
-                    <div className="form-group">
+                    <div className="form-group col-6 offset-3 text-center">
                         <label htmlFor="linesAdd">Eilutės</label>
                         <input min={0} type="number" className="form-control" id="linesAdd" value={add.lines}
                                onChange={e => setAdd({...add, lines: e.target.value})}/>
@@ -103,17 +111,35 @@ function Add() {
                     <div className="form-inline d-flex justify-content-center pt-3">
                         <label htmlFor="exampleInputSalary">Uždirbta:</label>
                         <div id="exampleInputSalary" className="SalaryCount mb-2 pl-2">
-                            {CountMoney(add.pallet,add.lines,add.vip,add.hours)}€
+                            {CountMoney(add.pallet, add.lines, add.vip, add.hours)}€
                         </div>
                     </div>
                     <div
-                        className={error === true ? "container-fluid d-flex justify-content-center error" : 'errorHide'}>
+                        className={error.field === true ? "container-fluid d-flex justify-content-center errorMessage" : 'successHide'}>
                         Neužpildyta
                     </div>
-                    <div className="d-flex justify-content-center py-3">
-                        <button className="btn btn-outline-light p-3" type="submit" value="submit">Išsaugoti
-                        </button>
+                    <div
+                        className={error.server === true ? "container-fluid d-flex justify-content-center errorMessage" : 'successHide'}>
+                        Išsaugoti nepavyko
                     </div>
+
+                    {error.redirectAnimation !== true ?
+                        <div className="container d-flex justify-content-center py-3">
+                            <button className="btn btn-outline-light p-3" type="submit" value="submit">Saugoti</button>
+                        </div>
+                        :
+                        <div>
+                            <div className="container d-flex justify-content-center bgGreen mt-2">
+                                <div>Išsaugota <i className="fas fa-check-circle"> </i></div>
+                            </div>
+                            <div className="container d-flex justify-content-center">
+                                Prašome palaukti
+                                <div className="spinner-border ml-2" role="status"
+                                     aria-hidden="true">
+                                </div>
+                            </div>
+                        </div>
+                    }
                 </form>
             </div>
         </div>

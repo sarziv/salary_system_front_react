@@ -44,7 +44,7 @@ function Register() {
             password_confirmation: passwordConfirmation
         })
             .then(function () {
-                setError({redirectAnimation: true})
+                setError({redirectAnimation: true});
                 setTimeout(redirectToLogin,3000);
             })
             .catch(function (error) {
