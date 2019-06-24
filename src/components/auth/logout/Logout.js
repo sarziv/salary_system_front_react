@@ -8,7 +8,7 @@ import * as API from '../../router/Api'
 function Logout() {
 
     const dispatch = useDispatch();
-    const access_token = useSelector(state=>state.access_token);
+    const access_token = useSelector(state=>state.AuthReducer.access_token);
     const [error,setError] = useState(false);
 
     function axiosLogout() {
@@ -16,7 +16,7 @@ function Logout() {
             .then(function () {
                 setError(false);
                 dispatch({type:'LOGOUT'});
-                dispatch({type:'RATE_LOGOUT'});
+                dispatch({type:'LOGOUT_RATES'});
             })
             .catch(function () {
                 setError(true);

@@ -2,12 +2,15 @@ import React, {useState} from 'react';
 import './Add.css';
 import {Redirect} from "react-router-dom";
 import {useSelector} from "react-redux";
+import axios from "axios";
+import * as API from "../../router/Api";
 
 
 function Add() {
     const [add, setAdd] = useState({pallet: '', lines: '', vip: 0, hours: 0});
     const [error, setError] = useState(false);
     const auth = useSelector(state => state.AuthReducer.authenticated);
+    const access_token = useSelector(state => state.AuthReducer.access_token);
     const rate_pallet = useSelector(state => state.RateReducer.rate_pallet);
     const rate_lines = useSelector(state => state.RateReducer.rate_lines);
     const rate_vip = useSelector(state => state.RateReducer.rate_vip);
@@ -19,6 +22,24 @@ function Add() {
                 lines * rate_lines +
                 vip * rate_vip +
                 extraHour * rate_extraHour).toFixed(1);
+    }
+    
+    
+   async function AxiosAdd() {
+       await axios.post(API.ADD,{
+             headers: {'Authorization': 'Bearer ' + access_token},
+             pallet: add.pallet,
+             lines: add.lines,
+             vip: add.vip,
+             extra_Hour: add.hours,
+        })
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error.response);
+                //TODO Error
+            });
     }
 
 
