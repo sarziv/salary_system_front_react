@@ -12,11 +12,19 @@ import Loading from '../../miscellaneous/loading/Loading';
 import {Link, Redirect} from "react-router-dom";
 import moment from 'moment';
 
+
+
 function Records() {
-    const auth = useSelector(state => state.AuthReducer.authenticated);
-    const access_token = useSelector(state => state.AuthReducer.access_token);
+
     const [records, setRecords] = useState({data: [{}]});
     const [loading, setLoading] = useState(true);
+
+    const auth = useSelector(state => state.AuthReducer.authenticated);
+    const access_token = useSelector(state => state.AuthReducer.access_token);
+    const rate_pallet = useSelector(state => state.RateReducer.rate_pallet);
+    const rate_lines = useSelector(state => state.RateReducer.rate_lines);
+    const rate_vip = useSelector(state => state.RateReducer.rate_vip);
+    const rate_extraHour = useSelector(state => state.RateReducer.rate_extraHour);
 
     useEffect(() => {
         async function fetchData() {
@@ -38,9 +46,11 @@ function Records() {
 
     function DataDisplay() {
 
-        function CountMoney(lines, pallet, vip, extraHour) {
-            //TODO RateController API
-            return (lines + pallet * 0.11 + vip * 3 + extraHour * 6).toFixed(1);
+        function CountMoney(pallet, lines, vip, extraHour) {
+            return (pallet * rate_pallet +
+                lines * rate_lines +
+                vip * rate_vip +
+                extraHour * rate_extraHour).toFixed(1);
         }
 
         function formatDate(date) {
@@ -60,7 +70,7 @@ function Records() {
                             <div className="d-flex justify-content-between">
                                 <div className="float-left">{formatDate(record.created_at)}</div>
                                 <div className="pl-4">
-                                    {CountMoney(record.lines, record.pallet, record.vip, record.extra_hour) + '€'}
+                                    {CountMoney(record.line, record.pallet, record.vip, record.extra_hour) + '€'}
                                 </div>
                             </div>
                         </Typography>
@@ -75,7 +85,7 @@ function Records() {
                                     </li>
                                     <li className="list-group-item">Eilutės:
                                         <span
-                                            className="badge badge-primary badge-pill float-right">{record.lines}</span>
+                                            className="badge badge-primary badge-pill float-right">{record.line}</span>
                                     </li>
                                     <li className="list-group-item">VIP:
                                         <span className="badge badge-primary badge-pill float-right">{record.vip}</span>

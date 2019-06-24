@@ -1,25 +1,26 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './Statistic.css';
 import {Redirect} from "react-router-dom";
 import {useSelector} from "react-redux";
 import axios from "axios";
 import * as API from "../../router/Api";
-
-const salary = 1000;
-const hours = 124;
-const extraHours = 8;
-const pallets = 8254;
-const lines = 4554;
-const vip = 5;
-
+import Loading from "../../miscellaneous/loading/Loading";
+import KOXO from '../../../image/KOXOBiN.gif';
 
 function Statistic() {
+
     const auth = useSelector(state => state.AuthReducer.authenticated);
     const access_token = useSelector(state => state.AuthReducer.access_token);
+    const rate_pallet = useSelector(state => state.RateReducer.rate_pallet);
+    const rate_lines = useSelector(state => state.RateReducer.rate_lines);
+    const rate_vip = useSelector(state => state.RateReducer.rate_vip);
+    const rate_extraHour = useSelector(state => state.RateReducer.rate_extraHour);
+
+    const [loading, setLoading] = useState(true);
+    const [stat, setStat] = useState({data: {}});
 
     function getMonthByName() {
         const date = new Date().getMonth() + 1;
-
         switch (date) {
             case 1:
                 return 'Sausis';
@@ -50,83 +51,134 @@ function Statistic() {
         }
     }
 
-    async function AxiosStatistic() {
-        await axios.get(API.ADD,
-            {
-
-            },
-            {
-                headers: {'Authorization': 'Bearer ' + access_token},
-            })
-            .then(function (response) {
-                console.log(response);
-
-            })
-            .catch(function (error) {
-                console.log(error.response);
-                setError({server: true});
-            });
+    function getDate() {
+        return new Date();
     }
 
+    useEffect(() => {
+        async function AxiosStat() {
+            await axios.post(API.STATISTIC, {
+                    year: getDate().getFullYear(),
+                    month: getDate().getMonth()+1
+                },
+                {
+                    headers: {'Authorization': 'Bearer ' + access_token},
+                })
+                .then(function (response) {
+                    const result = response.data[0];
+                    setStat({data: result})
+                    setLoading(false);
+                })
+                .catch(function (error) {
+                    setStat({data: {}})
+                    setLoading(true);
+                });
+        }
 
-    return auth === true ? (
-        <div className="toppading">
-            <div className="container">
-                <div className="d-flex justify-content-center monthinfo mb-5">{getMonthByName()}</div>
-                <div className="row">
-                    <div className="col-6 d-flex justify-content-center mb-2">
-                        <div className="stat-icon">
-                            <div className="stat-icon-text">
-                                {salary + ' '}€
-                            </div>
-                            <div className="stat-icon-nameTag">Uždirbta</div>
-                        </div>
-                    </div>
+        AxiosStat();
+    }, [access_token])
 
-                    <div className="col-6 d-flex justify-content-center mb-2">
-                        <div className="stat-icon">
-                            <div className="stat-icon-text">
-                                {extraHours + ' '}h
+    function monthSalary() {
+        const salary =
+            stat.data.total_pallet * rate_pallet +
+            stat.data.total_lines * rate_lines +
+            stat.data.total_vip * rate_vip +
+            stat.data.total_extra_hour * rate_extraHour
+        return salary;
+    }
+
+    function hourlyValue() {
+        return (monthSalary() / (stat.data.total_count * 8)).toFixed(1);
+    }
+
+    function MonthData() {
+        if (stat.data.total_count  !== 0) {
+            const MonthStatistic = (
+
+                <div className="toppading">
+                    <div className="container">
+                        <div className="d-flex justify-content-center monthinfo mb-5">{getMonthByName()}</div>
+                        <div className="row">
+                            <div className="col-6 d-flex justify-content-center mb-2">
+                                <div className="stat-icon">
+                                    <div className="stat-icon-text">
+                                        {monthSalary() + ' '}€
+                                    </div>
+                                    <div className="stat-icon-nameTag">Uždirbta</div>
+                                </div>
                             </div>
-                            <div className="stat-icon-nameTag">Pap.Val.</div>
-                        </div>
-                    </div>
-                    <div className="col-6 d-flex justify-content-center mb-2">
-                        <div className="stat-icon">
-                            <div className="stat-icon-text">
-                                {(salary/hours).toFixed(1) + ' '}€
+
+                            <div className="col-6 d-flex justify-content-center mb-2">
+                                <div className="stat-icon">
+                                    <div className="stat-icon-text">
+                                        {stat.data.total_extra_hour + ' '}h
+                                    </div>
+                                    <div className="stat-icon-nameTag">Pap.Val.</div>
+                                </div>
                             </div>
-                            <div className="stat-icon-nameTag">Valandinis</div>
-                        </div>
-                    </div>
-                    <div className="col-6 d-flex justify-content-center mb-2">
-                        <div className="stat-icon">
-                            <div className="stat-icon-text">
-                                {vip}
+                            <div className="col-6 d-flex justify-content-center mb-2">
+                                <div className="stat-icon">
+                                    <div className="stat-icon-text">
+                                        {hourlyValue() + ' '}€
+                                    </div>
+                                    <div className="stat-icon-nameTag">Valandinis</div>
+                                </div>
                             </div>
-                            <div className="stat-icon-nameTag">VIP</div>
-                        </div>
-                    </div>
-                    <div className="col-6 d-flex justify-content-center mb-2">
-                        <div className="stat-icon">
-                            <div className="stat-icon-text">
-                                {pallets}
+                            <div className="col-6 d-flex justify-content-center mb-2">
+                                <div className="stat-icon">
+                                    <div className="stat-icon-text">
+                                        {stat.data.total_vip}
+                                    </div>
+                                    <div className="stat-icon-nameTag">VIP</div>
+                                </div>
                             </div>
-                            <div className="stat-icon-nameTag">Paletės</div>
-                        </div>
-                    </div>
-                    <div className="col-6 d-flex justify-content-center mb-2">
-                        <div className="stat-icon">
-                            <div className="stat-icon-text">
-                                {lines}
+                            <div className="col-6 d-flex justify-content-center mb-2">
+                                <div className="stat-icon">
+                                    <div className="stat-icon-text">
+                                        {stat.data.total_pallet}
+                                    </div>
+                                    <div className="stat-icon-nameTag">Paletės</div>
+                                </div>
                             </div>
-                            <div className="stat-icon-nameTag">Eilutės</div>
+                            <div className="col-6 d-flex justify-content-center mb-2">
+                                <div className="stat-icon">
+                                    <div className="stat-icon-text">
+                                        {stat.data.total_lines}
+                                    </div>
+                                    <div className="stat-icon-nameTag">Eilutės</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    ) : (<Redirect to="/"/>);
+            );
+            return loading !== true ? (
+                MonthStatistic
+            ) : (
+                <div className="toppading">
+                    <div className="container">
+                        <Loading/>
+                    </div>
+                </div>
+            )
+        } else {
+            return (
+                <div className="toppading">
+                    <div className="container">
+                        <div className="d-flex justify-content-center">
+                            <img src={KOXO} alt="koxobin.." width={125} height={125}/>
+                        </div>
+                        <div className="text-center">Dirbk, Uždirbk, Judėk kaip bananiukas</div>
+                        <div className="text-center">Meniu gali rasti viršuje dešinėja pusėja. <i className="fas fa-bars"></i>
+                        </div>
+                    </div>
+                </div>);
+        }
+    }
+
+    return auth === true ?
+        <MonthData/> : <Redirect to="/"/>;
+
 }
 
 export default Statistic;

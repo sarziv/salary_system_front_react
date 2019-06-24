@@ -33,7 +33,7 @@ function Add() {
         await axios.post(API.ADD,
             {
                 pallet: add.pallet,
-                lines: add.lines,
+                line: add.lines,
                 vip: add.vip,
                 extra_hour: add.hours,
             },
