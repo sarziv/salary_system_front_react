@@ -114,14 +114,14 @@ function Add() {
                             {CountMoney(add.pallet, add.lines, add.vip, add.hours)}€
                         </div>
                     </div>
-                    <div
-                        className={error.field === true ? "container-fluid d-flex justify-content-center errorMessage" : 'successHide'}>
+                    {error.field === true ?
+                    <div className= "container-fluid d-flex justify-content-center errorMessage">
                         Neužpildyta
-                    </div>
-                    <div
-                        className={error.server === true ? "container-fluid d-flex justify-content-center errorMessage" : 'successHide'}>
+                    </div> : ''}
+                    {error.server === true ?
+                    <div className="container-fluid d-flex justify-content-center errorMessage">
                         Išsaugoti nepavyko
-                    </div>
+                    </div>: ''}
 
                     {error.redirectAnimation !== true ?
                         <div className="container d-flex justify-content-center py-3">

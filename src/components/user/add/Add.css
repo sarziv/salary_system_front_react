@@ -22,12 +22,6 @@ html {
      display: block;
      background-color: red;
  }
-.errorHide {
-    visibility: hidden;
-}
-.successHide {
-    visibility: hidden;
-}
 .successMessage {
     color: #F55E27;
     display: block;
