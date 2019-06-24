@@ -4,8 +4,6 @@ import './Search.css';
     const data = new Date();
     const  thisYear = data.getFullYear();
 
-
-//TODO find "value={value} bug???"
 function yearsList(thisYear) {
     const currentYear = thisYear-2;
     const years = [];//year generation
