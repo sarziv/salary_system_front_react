@@ -84,7 +84,7 @@ function Statistic() {
             stat.data.total_lines * rate_lines +
             stat.data.total_vip * rate_vip +
             stat.data.total_extra_hour * rate_extraHour
-        return salary;
+        return salary.toFixed(1);
     }
 
     function hourlyValue() {
