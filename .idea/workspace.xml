@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e2fd16fd-d518-4517-89b5-ba5639bf9589" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/sarunas.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/sarunas.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/user/search/Search.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/user/search/Search.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/user/statistics/Statistic.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/user/statistics/Statistic.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -71,8 +68,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/user/search/Search.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="66">
-              <caret line="6" selection-start-line="6" selection-end-line="6" />
+            <state relative-caret-position="291">
+              <caret line="97" column="27" selection-start-line="97" selection-start-column="27" selection-end-line="97" selection-end-column="27" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
                 <element signature="n#!!block;n#MonthList#0" />
@@ -471,7 +468,7 @@
       <workItem from="1561122163344" duration="4236000" />
       <workItem from="1561299029556" duration="24179000" />
       <workItem from="1561383755199" duration="22496000" />
-      <workItem from="1561469873504" duration="7216000" />
+      <workItem from="1561469873504" duration="8286000" />
     </task>
     <servers />
   </component>
@@ -484,7 +481,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="289129000" />
+    <option name="totallyTimeSpent" value="290199000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -837,8 +834,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/user/search/Search.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
+        <state relative-caret-position="291">
+          <caret line="97" column="27" selection-start-line="97" selection-start-column="27" selection-end-line="97" selection-end-column="27" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
             <element signature="n#!!block;n#MonthList#0" />

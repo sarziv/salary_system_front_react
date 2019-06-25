@@ -95,8 +95,9 @@ function Search() {
                         </div>
                     </div>
                     <div className="col-6 offset-3">
-                        <div className="text-center h6">NUO:<b>{search.from.year +'-'+ search.from.month +'-'+ search.from.day}</b></div>
-                        <div className="text-center h6">IKI:<b>{search.to.year +'-'+ search.to.month +'-'+ search.to.day}</b></div>
+                        <h5 className="text-center">Parinkta:</h5>
+                        <div className="text-center h6"><b>{search.from.year +'-'+ search.from.month +'-'+ search.from.day}</b></div>
+                        <div className="text-center h6"><b>{search.to.year +'-'+ search.to.month +'-'+ search.to.day}</b></div>
                     </div>
                     <div className="d-flex justify-content-center py-3">
                         <button className="btn btn-outline-light p-3" type="submit" value="submit">
