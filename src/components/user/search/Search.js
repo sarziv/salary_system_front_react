@@ -118,10 +118,6 @@ function Search() {
                 return moment(date).format('YYYY-MM-DD');
             }
 
-            //if No records
-            console.log(searchData.data.length + ' before');
-
-            console.log(searchData.data.length + 'after');
             //TODO Delete , edit records
             const listDisplay = searchData.data.map((record) =>
                 <ExpansionPanel key={record.id}>
