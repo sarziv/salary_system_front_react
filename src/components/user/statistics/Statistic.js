@@ -55,26 +55,26 @@ function Statistic() {
         return new Date();
     }
 
-    useEffect(() => {
-        async function AxiosStat() {
-            await axios.post(API.STATISTIC, {
-                    year: getDate().getFullYear(),
-                    month: getDate().getMonth()+1
-                },
-                {
-                    headers: {'Authorization': 'Bearer ' + access_token},
-                })
-                .then(function (response) {
-                    const result = response.data[0];
-                    setStat({data: result})
-                    setLoading(false);
-                })
-                .catch(function (error) {
-                    setStat({data: {}})
-                    setLoading(true);
-                });
-        }
+    async function AxiosStat() {
+        await axios.post(API.STATISTIC, {
+                year: getDate().getFullYear(),
+                month: getDate().getMonth() + 1
+            },
+            {
+                headers: {'Authorization': 'Bearer ' + access_token},
+            })
+            .then(function (response) {
+                const result = response.data[0];
+                setStat({data: result})
+                setLoading(false);
+            })
+            .catch(function (error) {
+                setStat({data: {}})
+                setLoading(true);
+            });
+    }
 
+    useEffect(() => {
         AxiosStat();
     }, [access_token])
 
@@ -92,7 +92,7 @@ function Statistic() {
     }
 
     function MonthData() {
-        if (stat.data.total_count  !== 0) {
+        if (stat.data.total_count !== 0) {
             const MonthStatistic = (
 
                 <div className="toppading">
@@ -169,7 +169,8 @@ function Statistic() {
                             <img src={KOXO} alt="koxobin.." width={125} height={125}/>
                         </div>
                         <div className="text-center">Dirbk, Uždirbk, Judėk kaip bananiukas</div>
-                        <div className="text-center">Meniu gali rasti viršuje dešinėja pusėja. <i className="fas fa-bars"></i>
+                        <div className="text-center">Meniu gali rasti viršuje dešinėja pusėja. <i
+                            className="fas fa-bars"></i>
                         </div>
                     </div>
                 </div>);
