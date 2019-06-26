@@ -166,7 +166,13 @@ function Search() {
                     if (loading.redirect !== true) {
                         return (
                             <div className="container-fluid toppading">
-                                <h4 className="d-flex justify-content-center">Radome:</h4>
+                                <h4 className="d-flex justify-content-center">
+                                    <div className="text-center h6"><b>
+                                        {search.from.year + '/' + search.from.month + '/' + search.from.day}
+                                        {'-'}
+                                        {search.to.year + '/' + search.to.month + '/' + search.to.day}
+                                    </b></div>
+                                </h4>
                                 <div className="container">
                                     {listDisplay}
                                 </div>
@@ -268,14 +274,6 @@ function Search() {
                                     {DayList()}
                                 </select>
                             </div>
-                        </div>
-                        <div className="col-12">
-
-                            <h5 className="text-center">Pasirinkta</h5>
-                            <div className="text-center h6"><b>
-                                {search.from.year + '-' + search.from.month + '-' + search.from.day}<br/>
-                                {search.to.year + '-' + search.to.month + '-' + search.to.day}
-                            </b></div>
                         </div>
                         <div className="d-flex justify-content-center py-3">
                             <button className="btn btn-outline-light p-3" type="submit" value="submit">

@@ -66,10 +66,10 @@ function NavBar() {
                     </div>
                     :
                     <div>
-                        <Link to="/statistic" onClick={() =>setOpen(!open)}>Statistika</Link>
-                        <Link to="/add" onClick={() =>setOpen(!open)}>Prideti</Link>
-                        <Link to="/records" onClick={() =>setOpen(!open)}>Duomenys</Link>
-                        <Link to="/search" onClick={() =>setOpen(!open)}>Ieškoti</Link>
+                        <Link to="/statistic" onClick={() =>setOpen(!open)}>Uždirbta</Link>
+                        <Link to="/add" onClick={() =>setOpen(!open)}>Pildyti</Link>
+                        <Link to="/records" onClick={() =>setOpen(!open)}>Istorija</Link>
+                        <Link to="/search" onClick={() =>setOpen(!open)}>Paieška</Link>
                         <div className="logoutButton"> <Link to="/logout" onClick={() =>setOpen(!open)}>Atsijungti</Link></div>
                     </div>
                 }

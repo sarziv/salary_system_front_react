@@ -16,7 +16,7 @@ import moment from 'moment';
 
 function Records() {
 
-    const [records, setRecords] = useState({data: []});
+    const [records, setRecords] = useState({data: [{}]});
     const [loading, setLoading] = useState(true);
 
     const auth = useSelector(state => state.AuthReducer.authenticated);
