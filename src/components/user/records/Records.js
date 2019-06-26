@@ -1,17 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import './Records.css';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import axios from 'axios';
 import * as API from "../../router/Api";
 import {useSelector} from "react-redux";
 import Loading from '../../miscellaneous/loading/Loading';
 import {Link, Redirect} from "react-router-dom";
-import moment from 'moment';
-
+import List from '../List/list';
 
 
 function Records() {
@@ -21,10 +15,7 @@ function Records() {
 
     const auth = useSelector(state => state.AuthReducer.authenticated);
     const access_token = useSelector(state => state.AuthReducer.access_token);
-    const rate_pallet = useSelector(state => state.RateReducer.rate_pallet);
-    const rate_lines = useSelector(state => state.RateReducer.rate_lines);
-    const rate_vip = useSelector(state => state.RateReducer.rate_vip);
-    const rate_extraHour = useSelector(state => state.RateReducer.rate_extraHour);
+
 
     useEffect(() => {
         async function fetchData() {
@@ -44,64 +35,11 @@ function Records() {
         fetchData();
     }, [access_token])
 
-    function DataDisplay() {
+    function DataDisplay(props) {
 
-        function CountMoney(pallet, lines, vip, extraHour) {
-            return (pallet * rate_pallet +
-                lines * rate_lines +
-                vip * rate_vip +
-                extraHour * rate_extraHour).toFixed(1);
-        }
-
-        function formatDate(date) {
-            return moment(date).format('YYYY-MM-DD');
-        }
-
-        //if No records
-        if (records.data.length !== 0) {
-            //TODO Delete , edit records
-            const listDisplay = records.data.map((record) =>
-                <ExpansionPanel key={record.id}>
-                    <ExpansionPanelSummary
-                        expandIcon={<ExpandMoreIcon/>}
-                        aria-controls="panel1a-content"
-                        id="panel1a-header">
-                        <Typography component={'span'}>
-                            <div className="d-flex justify-content-between">
-                                <div className="float-left">{formatDate(record.created_at)}</div>
-                                <div className="pl-4">
-                                    {CountMoney(record.line, record.pallet, record.vip, record.extra_hour) + '€'}
-                                </div>
-                            </div>
-                        </Typography>
-                    </ExpansionPanelSummary>
-                    <div className="col-12">
-                        <ExpansionPanelDetails className="d-inline">
-                            <Typography component={'span'}>
-                                <ul className="list-group list-group-flush border-dark">
-                                    <li className="list-group-item">Paletės:
-                                        <span
-                                            className="badge badge-primary badge-pill float-right">{record.pallet}</span>
-                                    </li>
-                                    <li className="list-group-item">Eilutės:
-                                        <span
-                                            className="badge badge-primary badge-pill float-right">{record.line}</span>
-                                    </li>
-                                    <li className="list-group-item">VIP:
-                                        <span className="badge badge-primary badge-pill float-right">{record.vip}</span>
-                                    </li>
-                                    <li className="list-group-item">Valandos:
-                                        <span
-                                            className="badge badge-primary badge-pill float-right">{record.extra_hour}</span>
-                                    </li>
-                                </ul>
-                            </Typography>
-                        </ExpansionPanelDetails>
-                    </div>
-                </ExpansionPanel>
-            );
+        if (props.userData.data.length !== 0) {
             return loading !== true ? (
-                listDisplay
+                <List userData={props.userData}/>
             ) : (
                 <Loading/>
             )
@@ -124,7 +62,7 @@ function Records() {
             <h4 className="d-flex justify-content-center">Istorija</h4>
             <h6 className="d-flex justify-content-center">5 paskutiniai</h6>
             <div className="container">
-                <DataDisplay/>
+                <DataDisplay userData={records}/>
             </div>
             <div className="bottompadding"></div>
         </div>

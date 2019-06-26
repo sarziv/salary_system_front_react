@@ -5,23 +5,13 @@ import axios from "axios";
 import * as API from "../../router/Api";
 import Loading from "../../miscellaneous/loading/Loading";
 import {useSelector} from "react-redux";
-import moment from 'moment';
-import ExpansionPanel from "@material-ui/core/ExpansionPanel";
-import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Typography from "@material-ui/core/Typography";
-import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import SADGIF from '../../../image/holding_back_tears.gif';
+import List from "../List/list";
 
 function Search() {
 
     const auth = useSelector(state => state.AuthReducer.authenticated);
     const access_token = useSelector(state => state.AuthReducer.access_token);
-    const rate_pallet = useSelector(state => state.RateReducer.rate_pallet);
-    const rate_lines = useSelector(state => state.RateReducer.rate_lines);
-    const rate_vip = useSelector(state => state.RateReducer.rate_vip);
-    const rate_extraHour = useSelector(state => state.RateReducer.rate_extraHour);
-
 
     function SearchMain() {
         const [searchData, setSearchData] = useState({data: []});
@@ -105,61 +95,8 @@ function Search() {
                 });
         }
 
-        function SearchDisplay() {
+        function SearchDisplay(props) {
 
-            function CountMoney(pallet, lines, vip, extraHour) {
-                return (pallet * rate_pallet +
-                    lines * rate_lines +
-                    vip * rate_vip +
-                    extraHour * rate_extraHour).toFixed(1);
-            }
-
-            function formatDate(date) {
-                return moment(date).format('YYYY-MM-DD');
-            }
-
-            //TODO Delete , edit records
-            const listDisplay = searchData.data.map((record) =>
-                <ExpansionPanel key={record.id}>
-                    <ExpansionPanelSummary
-                        expandIcon={<ExpandMoreIcon/>}
-                        aria-controls="panel1a-content"
-                        id="panel1a-header">
-                        <Typography component={'span'}>
-                            <div className="d-flex justify-content-between">
-                                <div className="float-left">{formatDate(record.created_at)}</div>
-                                <div className="pl-4">
-                                    {CountMoney(record.line, record.pallet, record.vip, record.extra_hour) + '€'}
-                                </div>
-                            </div>
-                        </Typography>
-                    </ExpansionPanelSummary>
-                    <div className="col-12">
-                        <ExpansionPanelDetails className="d-inline">
-                            <Typography component={'span'}>
-                                <ul className="list-group list-group-flush border-dark">
-                                    <li className="list-group-item">Paletės:
-                                        <span
-                                            className="badge badge-primary badge-pill float-right">{record.pallet}</span>
-                                    </li>
-                                    <li className="list-group-item">Eilutės:
-                                        <span
-                                            className="badge badge-primary badge-pill float-right">{record.line}</span>
-                                    </li>
-                                    <li className="list-group-item">VIP:
-                                        <span
-                                            className="badge badge-primary badge-pill float-right">{record.vip}</span>
-                                    </li>
-                                    <li className="list-group-item">Valandos:
-                                        <span
-                                            className="badge badge-primary badge-pill float-right">{record.extra_hour}</span>
-                                    </li>
-                                </ul>
-                            </Typography>
-                        </ExpansionPanelDetails>
-                    </div>
-                </ExpansionPanel>
-            );
 
             if (loading.redirectAnimation !== true) {
                 if (searchData.data.length !== 0) {
@@ -174,7 +111,7 @@ function Search() {
                                     </b></div>
                                 </h4>
                                 <div className="container">
-                                    {listDisplay}
+                                    <List userData={props.userData}/>
                                 </div>
                                 <div className="bottompadding"></div>
                             </div>
@@ -284,7 +221,7 @@ function Search() {
                 </div>
             </div>
         );
-        return loading.redirect === true ? SearchMain : <SearchDisplay/>;
+        return loading.redirect === true ? SearchMain : <SearchDisplay userData={searchData}/>;
     }
 
     return auth === true ?
