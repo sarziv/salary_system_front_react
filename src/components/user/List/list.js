@@ -61,6 +61,9 @@ function List(props) {
                                 <span
                                     className="badge badge-primary badge-pill float-right">{record.extra_hour}</span>
                             </li>
+                            <li className="list-group-item d-flex justify-content-center">
+                                    <button className="btn btn-danger ">Ištrinti</button>
+                            </li>
                         </ul>
                     </Typography>
                 </ExpansionPanelDetails>
