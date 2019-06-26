@@ -55,28 +55,28 @@ function Statistic() {
         return new Date();
     }
 
-    async function AxiosStat() {
-        await axios.post(API.STATISTIC, {
-                year: getDate().getFullYear(),
-                month: getDate().getMonth() + 1
-            },
-            {
-                headers: {'Authorization': 'Bearer ' + access_token},
-            })
-            .then(function (response) {
-                const result = response.data[0];
-                setStat({data: result})
-                setLoading(false);
-            })
-            .catch(function (error) {
-                setStat({data: {}})
-                setLoading(true);
-            });
-    }
 
     useEffect(() => {
+        async function AxiosStat() {
+            await axios.post(API.STATISTIC, {
+                    year: getDate().getFullYear(),
+                    month: getDate().getMonth() + 1
+                },
+                {
+                    headers: {'Authorization': 'Bearer ' + access_token},
+                })
+                .then(function (response) {
+                    const result = response.data[0];
+                    setStat({data: result})
+                    setLoading(false);
+                })
+                .catch(function (error) {
+                    setStat({data: {}})
+                    setLoading(true);
+                });
+        }
         AxiosStat();
-    }, [access_token])
+    },[access_token] )
 
     function monthSalary() {
         const salary =
