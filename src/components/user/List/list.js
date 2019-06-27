@@ -3,12 +3,16 @@ import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Typography from "@material-ui/core/Typography";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import moment from "moment";
 import {useSelector} from "react-redux";
+import axios from "axios";
+import * as API from "../../router/Api";
+import {Redirect} from "react-router-dom";
 
 function List(props) {
-
+    const [redirect,setRedirect] = useState(false);
+    const access_token = useSelector(state => state.AuthReducer.access_token);
     const rate_pallet = useSelector(state => state.RateReducer.rate_pallet);
     const rate_lines = useSelector(state => state.RateReducer.rate_lines);
     const rate_vip = useSelector(state => state.RateReducer.rate_vip);
@@ -25,7 +29,19 @@ function List(props) {
         return moment(date).format('YYYY-MM-DD');
     }
 
-// eslint-disable-next-line no-undef
+
+    async function AxiosDelete(id) {
+        await axios.delete(API.DELETE+id, {
+            headers: {'Authorization': 'Bearer ' + access_token}
+        })
+            .then(function (response) {
+                setRedirect(true);
+            })
+            .catch(function (error) {
+                setRedirect(false);
+                console.log(error.response)
+            })
+    }
 
     const listDisplay = props.userData.data.map((record) =>
         <ExpansionPanel key={record.id}>
@@ -62,7 +78,7 @@ function List(props) {
                                     className="badge badge-primary badge-pill float-right">{record.extra_hour}</span>
                             </li>
                             <li className="list-group-item d-flex justify-content-center">
-                                    <button className="btn btn-danger ">Ištrinti</button>
+                                    <button className="btn btn-danger" onClick={()=>{AxiosDelete(record.id)}} >Ištrinti</button>
                             </li>
                         </ul>
                     </Typography>
@@ -70,6 +86,6 @@ function List(props) {
             </div>
         </ExpansionPanel>
     );
-    return listDisplay;
+        return redirect === true ? (<Redirect to="/statistic"/>) : listDisplay;
 }
 export default List;
