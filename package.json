@@ -1,6 +1,7 @@
 {
   "name": "salary_system_front_react",
   "version": "0.1.0",
+  "homepage": "https://sarziv.github.io/salary_system_front_react/",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^3.9.3",
