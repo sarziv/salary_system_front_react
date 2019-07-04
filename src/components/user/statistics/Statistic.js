@@ -57,8 +57,7 @@ function Statistic() {
 
 
     useEffect(() => {
-        async function AxiosStat() {
-            await axios.post(API.STATISTIC, {
+             axios.post(API.STATISTIC, {
                     year: getDate().getFullYear(),
                     month: getDate().getMonth() + 1
                 },
@@ -74,8 +73,6 @@ function Statistic() {
                     setStat({data: {}})
                     setLoading(true);
                 });
-        }
-        AxiosStat();
     },[access_token] )
 
     function monthSalary() {

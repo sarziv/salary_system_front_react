@@ -21,10 +21,12 @@ function Routing() {
                     <Route path ="/login" exact component={Login}/>
                     <Route path="/register" exact component={Register}/>
                     <Route path="/recover" exact component={Recover}/>
+
                     <Route path="/records" exact component={Records}/>
                     <Route path="/add" exact component={Add}/>
                     <Route path="/statistic" exact component={Statistic}/>
                     <Route path="/search" exact component={Search}/>
+
                     <Route path="/logout" exact component={Logout}/>
                     </Switch>
 
